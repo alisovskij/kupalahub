@@ -1,0 +1,10 @@
+node_modules/
+dist/
+data/
+artifacts/
+.venv/
+.idea/
+.playwright-mcp/
+design/
+docs/
+package-lock.json
