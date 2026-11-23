@@ -1,0 +1,1 @@
+"""KupalaHub AI assistant service."""
