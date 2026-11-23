@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Верхняя панель — Kupala Hub</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&amp;family=Onest:wght@400;500;600&amp;family=Unbounded:wght@500;600&amp;display=swap">
+<style>body{margin:0}</style>
+</helmet>
+<header style="box-sizing:border-box;width:100%;min-height:72px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;padding:12px 32px;background:#F3F5F8;font-family:Onest,sans-serif;color:#15171C">
+  <div style="flex:1 1 240px;min-width:0;display:flex;flex-direction:column;gap:2px">
+    <h1 style="margin:0;font:600 22px/28px Unbounded,sans-serif;letter-spacing:-.01em">{{heading}}</h1>
+    <p style="margin:0;font:400 13px/18px Onest,sans-serif;color:#5F6878">{{subheading}}</p>
+  </div>
+  <a href="ModalSearch.dc.html" style="flex:0 1 380px;min-width:220px;height:44px;box-sizing:border-box;display:flex;align-items:center;gap:10px;padding:0 8px 0 14px;border:1px solid #8A94A4;border-radius:12px;background:#FFFFFF;color:#5F6878;text-decoration:none;font:400 14px/18px Onest,sans-serif">
+    <svg viewBox="0 0 24 24" aria-hidden="true" style="width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.4-4.4"/></svg>
+    <span style="flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Группа, преподаватель, аудитория</span>
+    <span style="font:500 11px/14px 'JetBrains Mono',monospace;color:#475161;background:#ECEFF3;border-radius:6px;padding:4px 6px">Ctrl K</span>
+  </a>
+  <a href="ModalNotifications.dc.html" aria-label="Уведомления, 2 новых" style="position:relative;width:44px;height:44px;box-sizing:border-box;flex:none;display:flex;align-items:center;justify-content:center;border:1px solid #C9D0DA;border-radius:12px;background:#FFFFFF;color:#15171C">
+    <svg viewBox="0 0 24 24" aria-hidden="true" style="width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 1.5h-15z"/><path d="M10 21h4"/></svg>
+    <span style="position:absolute;top:8px;right:9px;width:10px;height:10px;box-sizing:border-box;border-radius:50%;background:#FF6A3D;border:2px solid #FFFFFF"></span>
+  </a>
+  <sc-if value="{{showAsk}}" hint-placeholder-val="{{ true }}">
+    <a href="AssistantPlan.dc.html" style="height:44px;box-sizing:border-box;display:inline-flex;align-items:center;gap:8px;padding:0 16px;border-radius:12px;background:#DDF0EB;color:#0C6E5F;text-decoration:none;font:600 14px/18px Onest,sans-serif;white-space:nowrap">
+      <svg viewBox="0 0 24 24" aria-hidden="true" style="width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round"><path d="M12 3.5l1.9 5.1 5.1 1.9-5.1 1.9L12 17.5l-1.9-5.1L5 10.5l5.1-1.9z"/><path d="M18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/></svg>
+      Спросить ассистента
+    </a>
+  </sc-if>
+</header>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"heading":{"editor":"text","default":"Привет, Аня"},"subheading":{"editor":"text","default":"Вторник, 10 ноября · неделя 11 · ПИ-31"},"ask":{"editor":"enum","options":["show","hide"],"default":"show"},"$preview":{"width":1192,"height":72}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      heading: this.props.heading ?? 'Привет, Аня',
+      subheading: this.props.subheading ?? 'Вторник, 10 ноября · неделя 11 · ПИ-31',
+      showAsk: (this.props.ask ?? 'show') !== 'hide'
+    };
+  }
+}
+</script>
+</body>
+</html>

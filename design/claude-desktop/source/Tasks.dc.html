@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Учёба · задания — Kupala Hub</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&amp;family=Onest:wght@400;500;600&amp;family=Unbounded:wght@500;600&amp;display=swap">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#F3F5F8;color:#15171C;font-family:Onest,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#0C6E5F;text-decoration:none}a:hover{color:#095A4E}
+:focus-visible{outline:2px solid #0C6E5F;outline-offset:2px}
+h1,h2,h3,p,ul,ol{margin:0}ul,ol{padding:0;list-style:none}
+.tm{font:600 17px/22px Onest,sans-serif}
+.ts{font:600 15px/20px Onest,sans-serif}
+.bm{font:400 15px/21px Onest,sans-serif}
+.bs{font:400 13px/18px Onest,sans-serif}
+.lm{font:500 14px/18px Onest,sans-serif}
+.ls{font:500 12px/16px Onest,sans-serif}
+.cap{font:500 12px/16px Onest,sans-serif}
+.ov{font:600 11px/14px Onest,sans-serif;letter-spacing:.06em;text-transform:uppercase}
+.mms{font:500 12px/16px 'JetBrains Mono',monospace}
+.mu{color:#5F6878}.m2{color:#475161}
+.i{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.card{background:#FFFFFF;border:1px solid #E2E6EC;border-radius:16px}
+.row{display:flex;align-items:center;gap:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:12px;border:1px solid transparent;font:600 14px/18px Onest,sans-serif;white-space:nowrap;cursor:pointer;text-decoration:none}
+.b2{background:#FFFFFF;color:#15171C;border-color:#C9D0DA}.b2:hover{background:#ECEFF3;color:#15171C}
+.bgh{background:transparent;color:#0C6E5F}.bgh:hover{background:#DDF0EB;color:#095A4E}
+.sm{min-height:36px;padding:0 12px;border-radius:10px;font-size:13px}
+.badge{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 8px;border-radius:6px;font:600 11px/14px Onest,sans-serif;white-space:nowrap}
+.b-now{background:#FFE4D9;color:#A8381A}.b-bad{background:#FDE7E4;color:#B42318}.b-ok{background:#DDF1E4;color:#1E7A45}.b-demo{background:#ECE6FB;color:#5A3DB0}.b-sem{background:#EBEEF2;color:#475161}
+.tab{display:inline-flex;align-items:center;height:44px;padding:0 14px;margin-bottom:-1px;border-bottom:2px solid transparent;font:500 14px/18px Onest,sans-serif;color:#475161;text-decoration:none}
+.tab:hover{color:#15171C}
+.tab.on{color:#0C6E5F;font-weight:600;border-bottom-color:#0C6E5F}
+.col{flex:1 1 220px;min-width:0;display:flex;flex-direction:column;gap:10px;padding:12px;border-radius:16px;background:#ECEFF3}
+.cnt{display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:22px;padding:0 6px;border-radius:999px;background:#FFFFFF;font:600 12px/1 'JetBrains Mono',monospace;color:#475161}
+.task{padding:14px;display:flex;flex-direction:column;gap:8px}
+.chk{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #E2E6EC}
+.chk input{width:20px;height:20px;margin:0;flex:none;accent-color:#0C6E5F}
+.chk label{display:flex;flex-direction:column;gap:2px}
+</style>
+</helmet>
+<div style="min-height:100vh;display:flex;flex-wrap:wrap;align-items:stretch;background:#F3F5F8">
+  <div style="flex:1 1 248px;background:#F3F5F8;border-right:1px solid #E2E6EC">
+    <dc-import name="Sidebar" active="study" hint-size="100%,880px"></dc-import>
+  </div>
+  <main style="flex:999 1 560px;min-width:0;display:flex;flex-direction:column">
+    <dc-import name="Topbar" heading="Учёба" subheading="Задания из ЭУМК и личные задачи" hint-size="100%,72px"></dc-import>
+    <div style="padding:8px 32px 32px;display:flex;flex-direction:column;gap:20px">
+
+      <div class="row" style="justify-content:space-between;flex-wrap:wrap;border-bottom:1px solid #E2E6EC">
+        <nav aria-label="Разделы учёбы" style="display:flex;gap:4px">
+          <a class="tab" href="Grades.dc.html">Оценки</a>
+          <a class="tab on" href="Tasks.dc.html" aria-current="page">Задания</a>
+          <a class="tab" href="Session.dc.html">Сессия</a>
+        </nav>
+        <a class="badge b-demo" href="ModalDemo.dc.html" style="height:28px;padding:0 10px;margin-bottom:8px">
+          <svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:14px;height:14px"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.5h.01"/></svg>
+          Оценки, задания и сессия — демо-данные
+        </a>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start">
+        <div style="flex:999 1 560px;min-width:0;display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start">
+
+          <section class="col" aria-label="Срочно">
+            <div class="row" style="gap:8px;padding:2px 4px"><h2 class="ts">Срочно</h2><span class="cnt">1</span></div>
+            <article class="card task" style="border:1.5px solid #FF6A3D">
+              <div class="row" style="gap:6px;flex-wrap:wrap">
+                <span class="badge b-now"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:12px;height:12px"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>Сегодня, 23:59</span>
+                <span class="badge b-bad">Не сдано</span>
+              </div>
+              <h3 class="ts">Отчёт по лабораторной №4</h3>
+              <p class="bs mu">Базы данных · ЭУМК, лабораторная работа 4</p>
+              <a class="btn b2 sm" href="https://edu.grsu.by/" style="align-self:flex-start;margin-top:4px">
+                Открыть в ЭУМК
+                <svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:14px;height:14px"><path d="M14 4h6v6M20 4l-9 9M19 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"/></svg>
+              </a>
+            </article>
+          </section>
+
+          <section class="col" aria-label="На неделе">
+            <div class="row" style="gap:8px;padding:2px 4px"><h2 class="ts">На неделе</h2><span class="cnt">2</span></div>
+            <article class="card task">
+              <div class="row" style="gap:6px;flex-wrap:wrap"><span class="badge b-sem">Пт, 13 ноября</span></div>
+              <h3 class="ts">Тест по теме 2</h3>
+              <p class="bs mu">Теория вероятностей · 10 вопросов в ЭУМК</p>
+              <a class="btn b2 sm" href="Quiz.dc.html" style="align-self:flex-start;margin-top:4px">Потренироваться</a>
+            </article>
+            <article class="card task">
+              <div class="row" style="gap:6px;flex-wrap:wrap"><span class="badge b-sem">Ср, 11 ноября</span></div>
+              <h3 class="ts">Вопросы к семинару</h3>
+              <p class="bs mu">Философия · подготовить 3 вопроса</p>
+            </article>
+          </section>
+
+          <section class="col" aria-label="Сдано">
+            <div class="row" style="gap:8px;padding:2px 4px"><h2 class="ts">Сдано</h2><span class="cnt">2</span></div>
+            <article class="card task" style="background:#F8FAFC">
+              <div class="row" style="gap:6px;flex-wrap:wrap"><span class="badge b-ok"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:12px;height:12px"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Оценка 9</span><span class="cap mu">4 ноября</span></div>
+              <h3 class="ts m2">Лабораторная работа №3</h3>
+              <p class="bs mu">Базы данных</p>
+            </article>
+            <article class="card task" style="background:#F8FAFC">
+              <div class="row" style="gap:6px;flex-wrap:wrap"><span class="badge b-ok"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:12px;height:12px"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Зачтено</span><span class="cap mu">6 ноября</span></div>
+              <h3 class="ts m2">Эссе по философии</h3>
+              <p class="bs mu">Философия</p>
+            </article>
+          </section>
+
+        </div>
+
+        <div style="flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:16px">
+          <section class="card" style="padding:20px;display:flex;flex-direction:column;gap:6px">
+            <h2 class="ts" style="margin-bottom:4px">Личные задачи</h2>
+            <ul>
+              <li class="chk">
+                <input type="checkbox" id="pt1">
+                <label for="pt1"><span class="lm">Прочитать главу 4</span><span class="bs mu">Теория вероятностей · к пятнице</span></label>
+              </li>
+              <li class="chk">
+                <input type="checkbox" id="pt2" checked="{{ true }}">
+                <label for="pt2"><span class="lm mu" style="text-decoration:line-through">Скачать методичку</span><span class="bs mu">Веб-программирование</span></label>
+              </li>
+              <li class="chk" style="border-bottom:0">
+                <input type="checkbox" id="pt3">
+                <label for="pt3"><span class="lm">Записаться на консультацию</span><span class="bs mu">Базы данных · чт 15:00</span></label>
+              </li>
+            </ul>
+            <a class="btn bgh sm" href="ModalTask.dc.html" style="align-self:flex-start"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px"><path d="M12 5v14M5 12h14"/></svg>Добавить задачу</a>
+          </section>
+
+          <section style="background:#DDF0EB;border-radius:16px;padding:18px 20px;display:flex;gap:12px">
+            <svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="color:#0C6E5F;margin-top:2px"><path d="M12 3.5l1.9 5.1 5.1 1.9-5.1 1.9L12 17.5l-1.9-5.1L5 10.5l5.1-1.9z"/><path d="M18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/></svg>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <p class="ov" style="color:#0C6E5F">Подсказка ассистента</p>
+              <p class="bm">Тест по теме 2 — в пятницу. Удобное окно для тренировки — четверг после 13:00.</p>
+              <a class="ls" href="Quiz.dc.html" style="font-weight:600;margin-top:4px">Начать тренировку</a>
+            </div>
+          </section>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":920}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

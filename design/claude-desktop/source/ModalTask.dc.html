@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Новая задача — Kupala Hub</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&amp;family=Onest:wght@400;500;600&amp;family=Unbounded:wght@500;600&amp;display=swap">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#F3F5F8;color:#15171C;font-family:Onest,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#0C6E5F;text-decoration:none}a:hover{color:#095A4E}
+:focus-visible{outline:2px solid #0C6E5F;outline-offset:2px}
+h1,h2,h3,p,ul,ol{margin:0}ul,ol{padding:0;list-style:none}
+.dm{font:600 22px/28px Unbounded,sans-serif;letter-spacing:-.01em}
+.bs{font:400 13px/18px Onest,sans-serif}
+.lm{font:500 14px/18px Onest,sans-serif}
+.ls{font:500 12px/16px Onest,sans-serif}
+.mu{color:#5F6878}.m2{color:#475161}
+.i{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.row{display:flex;align-items:center;gap:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:12px;border:1px solid transparent;font:600 14px/18px Onest,sans-serif;white-space:nowrap;cursor:pointer;text-decoration:none}
+.bp{background:#0C6E5F;color:#FFFFFF}.bp:hover{background:#095A4E;color:#FFFFFF}
+.b2{background:#FFFFFF;color:#15171C;border-color:#C9D0DA}.b2:hover{background:#ECEFF3;color:#15171C}
+.chip{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 14px;border-radius:999px;border:1px solid #C9D0DA;background:#FFFFFF;color:#15171C;font:500 13px/16px Onest,sans-serif;cursor:pointer}
+.chip:hover{background:#ECEFF3}
+.chip.on{background:#0C6E5F;border-color:#0C6E5F;color:#FFFFFF}
+.sk{border-radius:16px;background:#FFFFFF;border:1px solid #E2E6EC}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{padding:0;margin-bottom:8px;font:500 12px/16px Onest,sans-serif;color:#475161}
+.inp{width:100%;height:46px;padding:0 14px;border:1px solid #8A94A4;border-radius:12px;background:#FFFFFF;font:400 15px/21px Onest,sans-serif;color:#15171C;outline:0}
+.inp:focus{border-color:#0C6E5F;box-shadow:0 0 0 3px #DDF0EB}
+.sw{appearance:none;-webkit-appearance:none;width:44px;height:26px;flex:none;margin:0;border-radius:13px;background:#C9D0DA;position:relative;cursor:pointer;transition:background .15s}
+.sw::before{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#FFFFFF;box-shadow:0 1px 2px rgba(21,23,28,.2);transition:transform .15s}
+.sw:checked{background:#0C6E5F}
+.sw:checked::before{transform:translateX(18px)}
+@media (prefers-reduced-motion:reduce){.sw,.sw::before{transition:none}}
+</style>
+</helmet>
+<div style="position:relative;min-height:100vh;display:flex;flex-wrap:wrap;align-items:stretch;background:#F3F5F8;overflow:hidden">
+  <div style="flex:1 1 248px;background:#F3F5F8;border-right:1px solid #E2E6EC">
+    <dc-import name="Sidebar" active="study" hint-size="100%,880px"></dc-import>
+  </div>
+  <main style="flex:999 1 560px;min-width:0;display:flex;flex-direction:column">
+    <dc-import name="Topbar" heading="Учёба" subheading="Задания из ЭУМК и личные задачи" hint-size="100%,72px"></dc-import>
+    <div aria-hidden="true" style="padding:8px 32px 32px;display:flex;flex-direction:column;gap:20px">
+      <div style="height:45px;border-bottom:1px solid #E2E6EC"></div>
+      <div style="display:flex;flex-wrap:wrap;gap:20px">
+        <div style="flex:999 1 560px;display:flex;gap:12px">
+          <div style="flex:1;height:300px;border-radius:16px;background:#ECEFF3"></div>
+          <div style="flex:1;height:420px;border-radius:16px;background:#ECEFF3"></div>
+          <div style="flex:1;height:360px;border-radius:16px;background:#ECEFF3"></div>
+        </div>
+        <div style="flex:1 1 320px;display:flex;flex-direction:column;gap:16px">
+          <div class="sk" style="height:300px"></div>
+          <div style="height:140px;border-radius:16px;background:#DDF0EB"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <a href="Tasks.dc.html" aria-label="Закрыть окно" style="position:absolute;inset:0;z-index:10;background:rgba(21,23,28,.45)"></a>
+
+  <section role="dialog" aria-modal="true" aria-labelledby="nt-h" style="position:absolute;z-index:11;top:50%;left:50%;transform:translate(-50%,-50%);width:520px;max-width:calc(100% - 32px);background:#FFFFFF;border-radius:20px;box-shadow:0 24px 64px rgba(21,23,28,.28);padding:24px;display:flex;flex-direction:column;gap:20px">
+    <div class="row" style="justify-content:space-between">
+      <h2 class="dm" id="nt-h">Новая задача</h2>
+      <a href="Tasks.dc.html" aria-label="Закрыть" style="width:40px;height:40px;flex:none;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#475161;background:#F3F5F8"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></a>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <label for="tn" class="ls m2">Название</label>
+      <input id="tn" class="inp" type="text" value="{{title}}" onChange="{{setTitle}}" placeholder="Что нужно сделать">
+    </div>
+
+    <fieldset>
+      <legend>Дисциплина</legend>
+      <div class="row" style="gap:8px;flex-wrap:wrap">
+        <button type="button" class="chip on" aria-pressed="true">Базы данных</button>
+        <button type="button" class="chip" aria-pressed="false">Веб-программирование</button>
+        <button type="button" class="chip" aria-pressed="false">Без дисциплины</button>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Срок</legend>
+      <div class="row" style="gap:8px;flex-wrap:wrap">
+        <button type="button" class="chip on" aria-pressed="true">К следующей паре</button>
+        <button type="button" class="chip" aria-pressed="false">Завтра</button>
+        <button type="button" class="chip" aria-pressed="false"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Выбрать дату</button>
+      </div>
+      <p class="bs mu" style="margin-top:8px">Следующая пара по базам данных — чт, 12 ноября, 10:05</p>
+    </fieldset>
+
+    <div class="row" style="gap:16px;padding:14px 16px;border-radius:14px;background:#F3F5F8">
+      <label for="rm" style="flex:1;display:flex;flex-direction:column;gap:2px;cursor:pointer">
+        <span class="lm">Напомнить за 1 час</span>
+        <span class="bs mu">Push и Telegram</span>
+      </label>
+      <input type="checkbox" role="switch" id="rm" class="sw" checked="{{remind}}" onChange="{{toggle}}">
+    </div>
+
+    <div class="row" style="justify-content:flex-end;gap:8px">
+      <a class="btn b2" href="Tasks.dc.html">Отмена</a>
+      <a class="btn bp" href="Tasks.dc.html">Сохранить задачу</a>
+    </div>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":920}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const s = this.state || {};
+    const remind = s.remind === undefined ? true : s.remind;
+    return {
+      title: s.title === undefined ? 'Отчёт по лабораторной №5' : s.title,
+      setTitle: (e) => this.setState({ title: e.target.value }),
+      remind: remind,
+      toggle: () => this.setState({ remind: !remind })
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Ассистент · где позаниматься — Kupala Hub</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&amp;family=Onest:wght@400;500;600&amp;family=Unbounded:wght@500;600&amp;display=swap">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#F3F5F8;color:#15171C;font-family:Onest,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#0C6E5F;text-decoration:none}a:hover{color:#095A4E}
+:focus-visible{outline:2px solid #0C6E5F;outline-offset:2px}
+h1,h2,h3,p,ul,ol{margin:0}ul,ol{padding:0;list-style:none}
+.ts{font:600 15px/20px Onest,sans-serif}
+.bm{font:400 15px/22px Onest,sans-serif}
+.bs{font:400 13px/18px Onest,sans-serif}
+.lm{font:500 14px/18px Onest,sans-serif}
+.ls{font:500 12px/16px Onest,sans-serif}
+.cap{font:500 12px/16px Onest,sans-serif}
+.ov{font:600 11px/14px Onest,sans-serif;letter-spacing:.06em;text-transform:uppercase}
+.mxl{font:700 40px/44px 'JetBrains Mono',monospace;letter-spacing:-.02em}
+.mms{font:500 12px/16px 'JetBrains Mono',monospace}
+.mu{color:#5F6878}.m2{color:#475161}
+.i{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.card{background:#FFFFFF;border:1px solid #E2E6EC;border-radius:16px}
+.row{display:flex;align-items:center;gap:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:12px;border:1px solid transparent;font:600 14px/18px Onest,sans-serif;white-space:nowrap;cursor:pointer;text-decoration:none}
+.bp{background:#0C6E5F;color:#FFFFFF}.bp:hover{background:#095A4E;color:#FFFFFF}
+.b2{background:#FFFFFF;color:#15171C;border-color:#C9D0DA}.b2:hover{background:#ECEFF3;color:#15171C}
+.sm{min-height:36px;padding:0 12px;border-radius:10px;font-size:13px}
+.chip{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 14px;border-radius:999px;border:1px solid #C9D0DA;background:#FFFFFF;color:#15171C;font:500 13px/16px Onest,sans-serif;cursor:pointer;text-decoration:none}
+.chip:hover{background:#ECEFF3;color:#15171C}
+.badge{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 8px;border-radius:6px;font:600 11px/14px Onest,sans-serif;white-space:nowrap}
+.b-ok{background:#DDF1E4;color:#1E7A45}.b-demo{background:#ECE6FB;color:#5A3DB0}.b-sem{background:#EBEEF2;color:#475161}.b-lec{background:#DDF0EB;color:#0C6E5F}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.field{display:flex;align-items:center;gap:10px;min-height:48px;padding:0 6px 0 16px;border:1px solid #8A94A4;border-radius:14px;background:#FFFFFF}
+.field input{flex:1;min-width:0;border:0;outline:0;background:transparent;font:400 15px/21px Onest,sans-serif;color:#15171C}
+.field:focus-within{border-color:#0C6E5F;box-shadow:0 0 0 3px #DDF0EB}
+.conv{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border-radius:12px;color:#15171C;text-decoration:none}
+.conv:hover{background:#F3F5F8;color:#15171C}
+.tool{display:inline-flex;align-items:center;gap:5px;height:24px;padding:0 8px;border-radius:6px;background:#F3F5F8;border:1px solid #E2E6EC;font:500 12px/16px Onest,sans-serif;color:#475161}
+.kv{display:flex;flex-direction:column;gap:2px;padding:10px 0;border-top:1px solid #E2E6EC}
+.src{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0;border-top:1px solid #E2E6EC}
+.room{flex:1 1 200px;display:flex;flex-direction:column;gap:6px;padding:16px;border-radius:14px;border:1px solid #E2E6EC;background:#F8FAFC}
+</style>
+</helmet>
+<div style="min-height:100vh;display:flex;flex-wrap:wrap;align-items:stretch;background:#F3F5F8">
+  <div style="flex:1 1 248px;background:#F3F5F8;border-right:1px solid #E2E6EC">
+    <dc-import name="Sidebar" active="assistant" hint-size="100%,880px"></dc-import>
+  </div>
+  <main style="flex:999 1 560px;min-width:0;display:flex;flex-direction:column">
+    <dc-import name="Topbar" heading="Ассистент" subheading="Отвечает по расписанию, учёбе и правилам университета" ask="hide" hint-size="100%,72px"></dc-import>
+    <div style="flex:1;padding:8px 32px 32px;display:flex;flex-wrap:wrap;gap:20px;align-items:stretch">
+
+      <nav aria-label="Диалоги" class="card" style="flex:1 1 230px;min-width:0;padding:16px;display:flex;flex-direction:column;gap:10px">
+        <a class="btn b2" href="AssistantPlan.dc.html" style="justify-content:flex-start">
+          <svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:18px;height:18px"><path d="M12 5v14M5 12h14"/></svg>
+          Новый диалог
+        </a>
+        <p class="ov mu" style="padding:8px 12px 0">Недавние</p>
+        <a class="conv" href="AssistantPlan.dc.html">
+          <span class="lm">План подготовки к сессии</span>
+          <span class="cap mu">сегодня, 10:40</span>
+        </a>
+        <a class="conv" href="AssistantRooms.dc.html" aria-current="page" style="background:#DDF0EB">
+          <span class="lm" style="color:#0C6E5F;font-weight:600">Где позаниматься в окно?</span>
+          <span class="cap mu">сегодня, 10:46</span>
+        </a>
+        <a class="conv" href="Quiz.dc.html">
+          <span class="lm">Тест по базам данных</span>
+          <span class="cap mu">вчера</span>
+        </a>
+      </nav>
+
+      <section aria-label="Где позаниматься в окно" class="card" style="flex:999 1 420px;min-width:0;display:flex;flex-direction:column;overflow:hidden">
+        <div class="row" style="justify-content:space-between;padding:14px 20px;border-bottom:1px solid #E2E6EC">
+          <h2 class="ts">Где позаниматься в окно?</h2>
+          <span class="cap mu">сегодня, 10:46</span>
+        </div>
+
+        <div style="flex:1;overflow:auto;padding:20px;display:flex;flex-direction:column;gap:14px">
+          <p class="bm" style="align-self:flex-end;max-width:80%;padding:10px 14px;border-radius:14px 14px 4px 14px;background:#15171C;color:#FFFFFF">Где позаниматься в окно?</p>
+
+          <div class="row" style="gap:6px;flex-wrap:wrap">
+            <span class="cap mu">Проверил:</span>
+            <span class="tool"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:12px;height:12px;color:#1E7A45"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>ваши пары сегодня</span>
+            <span class="tool"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:12px;height:12px;color:#1E7A45"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>свободные аудитории</span>
+          </div>
+
+          <div style="display:flex;flex-direction:column;gap:12px;max-width:620px">
+            <p class="bm">С 13:00 до 14:20 свободны две аудитории в главном корпусе — рядом с ауд. 204, где у вас английский.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:10px">
+              <div class="room">
+                <span class="row" style="justify-content:space-between"><span class="mxl">214</span><span class="badge b-ok">до 14:20</span></span>
+                <span class="lm">Свободна всё окно</span>
+                <span class="bs mu">2 этаж · 1 мин от ауд. 204</span>
+              </div>
+              <div class="room">
+                <span class="row" style="justify-content:space-between"><span class="mxl">218</span><span class="badge b-ok">до 15:40</span></span>
+                <span class="lm">Свободна всё окно</span>
+                <span class="bs mu">2 этаж · 2 мин от ауд. 204</span>
+              </div>
+            </div>
+            <div class="row" style="gap:8px;flex-wrap:wrap">
+              <a class="btn bp sm" href="ModalRoute.dc.html">
+                <svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px"><circle cx="6" cy="18.5" r="2"/><circle cx="18" cy="5.5" r="2"/><path d="M8 18.5h8.5a3.25 3.25 0 0 0 0-6.5h-9a3.25 3.25 0 0 1 0-6.5H16"/></svg>
+                Маршрут до 214
+              </a>
+              <a class="btn b2 sm" href="Rooms.dc.html">Все аудитории</a>
+            </div>
+            <div class="row" style="gap:6px;flex-wrap:wrap">
+              <span class="cap mu">Источники:</span>
+              <span class="badge b-lec">Индекс аудиторий</span>
+              <span class="badge b-lec">Расписание ПИ-31</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="padding:14px 20px 18px;border-top:1px solid #E2E6EC;display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <a class="chip" href="AssistantPlan.dc.html">План подготовки к сессии</a>
+            <a class="chip" href="Quiz.dc.html">Тест по базам данных</a>
+          </div>
+          <label class="field"><span class="sr">Сообщение ассистенту</span><input type="text" placeholder="Спросите о расписании, оценках или правилах…">
+            <a class="btn bp" href="AssistantPlan.dc.html" aria-label="Отправить" style="width:38px;min-height:38px;padding:0;border-radius:10px"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:18px;height:18px"><path d="M4 12 20 4l-5 16-3-7z"/><path d="M12 13l8-9"/></svg></a>
+          </label>
+        </div>
+      </section>
+
+      <aside aria-label="Что знает ассистент" class="card" style="flex:1 1 280px;min-width:0;padding:18px 20px;display:flex;flex-direction:column;gap:4px">
+        <h2 class="ts" style="margin-bottom:8px">Что знает ассистент</h2>
+        <div class="kv"><span class="cap mu">Группа</span><span class="lm">ПИ-31 · подгруппа 1</span></div>
+        <div class="kv"><span class="cap mu">Сегодня</span><span class="lm">4 пары, окно 13:00–14:20</span></div>
+        <div class="kv"><span class="cap mu">После окна</span><span class="lm">Английский язык, ауд. 204</span></div>
+        <p class="ov mu" style="padding:16px 0 6px;border-top:1px solid #E2E6EC">Источники</p>
+        <div class="src" style="border-top:0"><span class="lm">Расписание</span><span class="badge b-ok">API ГрГУ</span></div>
+        <div class="src"><span class="lm">Свободные аудитории</span><span class="badge b-ok">Из API</span></div>
+        <div class="src"><span class="lm">Оценки и пропуски</span><span class="badge b-demo">Демо</span></div>
+        <div class="src"><span class="lm">Правила и положения</span><span class="badge b-sem">Документы</span></div>
+        <p class="bs mu" style="margin-top:auto;padding:12px 14px;border-radius:12px;background:#F3F5F8">Свободные аудитории считаются по расписанию всех групп. Мероприятия и брони не учитываются.</p>
+      </aside>
+
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":920}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

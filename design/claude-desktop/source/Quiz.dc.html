@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Тест по базам данных — Kupala Hub</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&amp;family=Onest:wght@400;500;600&amp;family=Unbounded:wght@500;600&amp;display=swap">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#F3F5F8;color:#15171C;font-family:Onest,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#0C6E5F;text-decoration:none}a:hover{color:#095A4E}
+:focus-visible{outline:2px solid #0C6E5F;outline-offset:2px}
+h1,h2,h3,p,ul,ol{margin:0}ul,ol{padding:0;list-style:none}
+.tl{font:600 20px/28px Onest,sans-serif}
+.ts{font:600 15px/20px Onest,sans-serif}
+.bm{font:400 15px/21px Onest,sans-serif}
+.bs{font:400 13px/18px Onest,sans-serif}
+.lm{font:500 14px/18px Onest,sans-serif}
+.ls{font:500 12px/16px Onest,sans-serif}
+.cap{font:500 12px/16px Onest,sans-serif}
+.mms{font:500 12px/16px 'JetBrains Mono',monospace}
+.mu{color:#5F6878}.m2{color:#475161}
+.i{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.card{background:#FFFFFF;border:1px solid #E2E6EC;border-radius:16px}
+.row{display:flex;align-items:center;gap:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:12px;border:1px solid transparent;font:600 14px/18px Onest,sans-serif;white-space:nowrap;cursor:pointer;text-decoration:none}
+.bp{background:#0C6E5F;color:#FFFFFF}.bp:hover{background:#095A4E;color:#FFFFFF}
+.b2{background:#FFFFFF;color:#15171C;border-color:#C9D0DA}.b2:hover{background:#ECEFF3;color:#15171C}
+.bgh{background:transparent;color:#0C6E5F}.bgh:hover{background:#DDF0EB;color:#095A4E}
+.sm{min-height:36px;padding:0 12px;border-radius:10px;font-size:13px}
+.badge{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 8px;border-radius:6px;font:600 11px/14px Onest,sans-serif;white-space:nowrap}
+.b-demo{background:#ECE6FB;color:#5A3DB0}
+.opt{width:100%;min-height:60px;display:flex;align-items:center;gap:14px;padding:10px 16px 10px 10px;border-radius:14px;border-style:solid;border-width:1.5px;cursor:pointer;font:inherit;color:#15171C;text-align:left}
+.opt:hover{border-color:#C9D0DA}
+</style>
+</helmet>
+<div style="min-height:100vh;display:flex;flex-wrap:wrap;align-items:stretch;background:#F3F5F8">
+  <div style="flex:1 1 248px;background:#F3F5F8;border-right:1px solid #E2E6EC">
+    <dc-import name="Sidebar" active="study" hint-size="100%,880px"></dc-import>
+  </div>
+  <main style="flex:999 1 560px;min-width:0;display:flex;flex-direction:column">
+    <dc-import name="Topbar" heading="Тест · Базы данных" subheading="10 вопросов по ЭУМК · лекция 9" hint-size="100%,72px"></dc-import>
+    <div style="padding:8px 32px 32px;display:flex;justify-content:center">
+      <div style="width:100%;max-width:720px;display:flex;flex-direction:column;gap:16px">
+        <a class="btn bgh sm" href="Tasks.dc.html" style="align-self:flex-start;margin-left:-12px">
+          <svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+          К заданиям
+        </a>
+
+        <section class="card" style="padding:28px;display:flex;flex-direction:column;gap:22px">
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div class="row" style="justify-content:space-between;flex-wrap:wrap">
+              <span class="lm">Вопрос <span class="mms" style="font-size:14px">1</span> из <span class="mms" style="font-size:14px">10</span></span>
+              <span class="bs mu">Тема: нормализация</span>
+            </div>
+            <div aria-hidden="true" style="height:6px;border-radius:3px;background:#ECEFF3;overflow:hidden"><div style="width:10%;height:100%;border-radius:3px;background:#0C6E5F"></div></div>
+          </div>
+
+          <h2 class="tl" id="q1">Какая нормальная форма требует, чтобы каждый неключевой атрибут зависел от всего составного ключа, а не от его части?</h2>
+
+          <div role="group" aria-labelledby="q1" style="display:flex;flex-direction:column;gap:10px">
+            <sc-for list="{{opts}}" as="o" hint-placeholder-count="4">
+              <button type="button" class="opt" onClick="{{o.pick}}" aria-pressed="{{o.pressed}}" style="background:{{o.bg}};border-color:{{o.bd}}">
+                <span style="width:40px;height:40px;flex:none;border-radius:10px;display:flex;align-items:center;justify-content:center;font:700 14px/1 'JetBrains Mono',monospace;background:{{o.keyBg}};color:{{o.keyFg}}">{{o.id}}</span>
+                <span style="flex:1;font:500 15px/21px Onest,sans-serif">{{o.text}}</span>
+                <span class="ls" style="color:{{o.noteFg}}">{{o.note}}</span>
+              </button>
+            </sc-for>
+          </div>
+
+          <p class="bs" aria-live="polite" style="color:{{hintFg}}">{{hint}}</p>
+
+          <div class="row" style="justify-content:space-between;flex-wrap:wrap;padding-top:18px;border-top:1px solid #E2E6EC">
+            <span class="badge b-demo">Вопросы по ЭУМК, лекция 9 · демо</span>
+            <div class="row" style="gap:8px">
+              <a class="btn b2" href="AssistantPlan.dc.html">
+                <svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:18px;height:18px;color:#0C6E5F"><path d="M12 3.5l1.9 5.1 5.1 1.9-5.1 1.9L12 17.5l-1.9-5.1L5 10.5l5.1-1.9z"/></svg>
+                Объяснить
+              </a>
+              <button type="button" class="btn bp" onClick="{{reset}}">Следующий вопрос</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":920}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const picked = this.state && this.state.picked;
+    const base = [
+      { id: 'A', text: 'Первая (1НФ)' },
+      { id: 'B', text: 'Вторая (2НФ)' },
+      { id: 'C', text: 'Третья (3НФ)' },
+      { id: 'D', text: 'Нормальная форма Бойса — Кодда' }
+    ];
+    const opts = base.map((o) => {
+      let bg = '#FFFFFF', bd = '#E2E6EC', keyBg = '#ECEFF3', keyFg = '#15171C', note = '', noteFg = '#475161';
+      if (picked && o.id === 'B') {
+        bg = '#DDF1E4'; bd = '#1E7A45'; keyBg = '#1E7A45'; keyFg = '#FFFFFF'; note = 'Верный ответ'; noteFg = '#1E7A45';
+      } else if (picked && o.id === picked) {
+        bg = '#FDE7E4'; bd = '#B42318'; keyBg = '#B42318'; keyFg = '#FFFFFF'; note = 'Ваш ответ'; noteFg = '#B42318';
+      }
+      return {
+        id: o.id, text: o.text, bg: bg, bd: bd, keyBg: keyBg, keyFg: keyFg, note: note, noteFg: noteFg,
+        pressed: picked === o.id ? 'true' : 'false',
+        pick: () => this.setState({ picked: o.id })
+      };
+    });
+    let hint = 'Нажмите на вариант — ответ проверится сразу.';
+    let hintFg = '#5F6878';
+    if (picked === 'B') {
+      hint = 'Верно. 2НФ убирает зависимость неключевых атрибутов от части составного ключа.';
+      hintFg = '#1E7A45';
+    } else if (picked) {
+      hint = 'Неверно. Правильный ответ — 2НФ: неключевой атрибут должен зависеть от всего составного ключа.';
+      hintFg = '#B42318';
+    }
+    return { opts: opts, hint: hint, hintFg: hintFg, reset: () => this.setState({ picked: null }) };
+  }
+}
+</script>
+</body>
+</html>

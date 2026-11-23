@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Свободные аудитории — Kupala Hub</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&amp;family=Onest:wght@400;500;600&amp;family=Unbounded:wght@500;600&amp;display=swap">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#F3F5F8;color:#15171C;font-family:Onest,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#0C6E5F;text-decoration:none}a:hover{color:#095A4E}
+:focus-visible{outline:2px solid #0C6E5F;outline-offset:2px}
+h1,h2,h3,p,ul,ol{margin:0}ul,ol{padding:0;list-style:none}
+.ts{font:600 15px/20px Onest,sans-serif}
+.bm{font:400 15px/22px Onest,sans-serif}
+.bs{font:400 13px/18px Onest,sans-serif}
+.lm{font:500 14px/18px Onest,sans-serif}
+.ls{font:500 12px/16px Onest,sans-serif}
+.cap{font:500 12px/16px Onest,sans-serif}
+.ov{font:600 11px/14px Onest,sans-serif;letter-spacing:.06em;text-transform:uppercase}
+.mxl{font:700 40px/44px 'JetBrains Mono',monospace;letter-spacing:-.02em}
+.mms{font:500 12px/16px 'JetBrains Mono',monospace}
+.mu{color:#5F6878}.m2{color:#475161}
+.i{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.card{background:#FFFFFF;border:1px solid #E2E6EC;border-radius:16px}
+.row{display:flex;align-items:center;gap:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:12px;border:1px solid transparent;font:600 14px/18px Onest,sans-serif;white-space:nowrap;cursor:pointer;text-decoration:none}
+.b2{background:#FFFFFF;color:#15171C;border-color:#C9D0DA}.b2:hover{background:#ECEFF3;color:#15171C}
+.sm{min-height:36px;padding:0 12px;border-radius:10px;font-size:13px}
+.chip{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 14px;border-radius:999px;border:1px solid #C9D0DA;background:#FFFFFF;color:#15171C;font:500 13px/16px Onest,sans-serif;cursor:pointer;text-decoration:none}
+.chip:hover{background:#ECEFF3;color:#15171C}
+.chip.on{background:#0C6E5F;border-color:#0C6E5F;color:#FFFFFF}
+.badge{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 8px;border-radius:6px;font:600 11px/14px Onest,sans-serif;white-space:nowrap}
+.b-ok{background:#DDF1E4;color:#1E7A45}.b-warn{background:#FFF1D6;color:#7A4E00}
+.rc{padding:16px;display:flex;flex-direction:column;gap:8px;color:#15171C;text-decoration:none}
+.rc:hover{border-color:#C9D0DA;color:#15171C;box-shadow:0 4px 14px rgba(21,23,28,.06)}
+.go{display:inline-flex;align-items:center;gap:6px;margin-top:6px;font:600 13px/16px Onest,sans-serif;color:#0C6E5F}
+</style>
+</helmet>
+<div style="min-height:100vh;display:flex;flex-wrap:wrap;align-items:stretch;background:#F3F5F8">
+  <div style="flex:1 1 248px;background:#F3F5F8;border-right:1px solid #E2E6EC">
+    <dc-import name="Sidebar" active="rooms" hint-size="100%,880px"></dc-import>
+  </div>
+  <main style="flex:999 1 560px;min-width:0;display:flex;flex-direction:column">
+    <dc-import name="Topbar" heading="Свободные аудитории" subheading="Сегодня, вторник · по расписанию всех групп" hint-size="100%,72px"></dc-import>
+    <div style="padding:8px 32px 32px;display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start">
+
+      <div style="flex:999 1 560px;min-width:0;display:flex;flex-direction:column;gap:16px">
+        <div class="row" style="flex-wrap:wrap;gap:8px">
+          <div role="group" aria-label="Корпус" class="row" style="gap:8px;flex-wrap:wrap">
+            <button type="button" class="chip on" aria-pressed="true">Главный корпус</button>
+            <button type="button" class="chip" aria-pressed="false">Корпус ФМИ</button>
+            <button type="button" class="chip" aria-pressed="false">Все корпуса</button>
+          </div>
+          <span aria-hidden="true" style="width:1px;height:24px;background:#C9D0DA;margin:0 4px"></span>
+          <button type="button" class="chip">
+            <svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px;color:#0C6E5F"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+            Сегодня, <span class="mms" style="font-size:13px">13:00–14:20</span>
+            <svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px;color:#475161"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <span class="bs mu" style="margin-left:auto">Мероприятия и брони не учитываются</span>
+        </div>
+
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px">
+          <a class="card rc" href="ModalRoute.dc.html" style="border-color:#0C6E5F;box-shadow:0 0 0 1px #0C6E5F">
+            <div class="row" style="justify-content:space-between;align-items:flex-start"><h2 class="mxl">214</h2><span class="badge b-ok">До 14:20</span></div>
+            <p class="bs m2">2 этаж · 1 мин от ауд. 204</p>
+            <span class="go"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px"><circle cx="6" cy="18.5" r="2"/><circle cx="18" cy="5.5" r="2"/><path d="M8 18.5h8.5a3.25 3.25 0 0 0 0-6.5h-9a3.25 3.25 0 0 1 0-6.5H16"/></svg>Маршрут · ближе всего</span>
+          </a>
+          <a class="card rc" href="ModalRoute.dc.html">
+            <div class="row" style="justify-content:space-between;align-items:flex-start"><h2 class="mxl">207</h2><span class="badge b-ok">До 16:00</span></div>
+            <p class="bs m2">2 этаж · 1 мин от ауд. 204</p>
+            <span class="go"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px"><circle cx="6" cy="18.5" r="2"/><circle cx="18" cy="5.5" r="2"/><path d="M8 18.5h8.5a3.25 3.25 0 0 0 0-6.5h-9a3.25 3.25 0 0 1 0-6.5H16"/></svg>Маршрут</span>
+          </a>
+          <a class="card rc" href="ModalRoute.dc.html">
+            <div class="row" style="justify-content:space-between;align-items:flex-start"><h2 class="mxl">218</h2><span class="badge b-ok">До 15:40</span></div>
+            <p class="bs m2">2 этаж · 2 мин от ауд. 204</p>
+            <span class="go"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px"><circle cx="6" cy="18.5" r="2"/><circle cx="18" cy="5.5" r="2"/><path d="M8 18.5h8.5a3.25 3.25 0 0 0 0-6.5h-9a3.25 3.25 0 0 1 0-6.5H16"/></svg>Маршрут</span>
+          </a>
+          <a class="card rc" href="ModalRoute.dc.html">
+            <div class="row" style="justify-content:space-between;align-items:flex-start"><h2 class="mxl">305</h2><span class="badge b-ok">Весь день</span></div>
+            <p class="bs m2">3 этаж · 3 мин от ауд. 204</p>
+            <span class="go"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px"><circle cx="6" cy="18.5" r="2"/><circle cx="18" cy="5.5" r="2"/><path d="M8 18.5h8.5a3.25 3.25 0 0 0 0-6.5h-9a3.25 3.25 0 0 1 0-6.5H16"/></svg>Маршрут</span>
+          </a>
+          <a class="card rc" href="ModalRoute.dc.html" style="background:#F8FAFC">
+            <div class="row" style="justify-content:space-between;align-items:flex-start"><h2 class="mxl m2">101</h2><span class="badge b-warn">До 14:00</span></div>
+            <p class="bs m2">1 этаж · <span style="color:#7A4E00;font-weight:500">свободна не всё окно</span></p>
+            <span class="go"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px"><circle cx="6" cy="18.5" r="2"/><circle cx="18" cy="5.5" r="2"/><path d="M8 18.5h8.5a3.25 3.25 0 0 0 0-6.5h-9a3.25 3.25 0 0 1 0-6.5H16"/></svg>Маршрут</span>
+          </a>
+          <a class="card rc" href="ModalRoute.dc.html" style="background:#F8FAFC">
+            <div class="row" style="justify-content:space-between;align-items:flex-start"><h2 class="mxl m2">410</h2><span class="badge b-warn">С 13:30</span></div>
+            <p class="bs m2">4 этаж · <span style="color:#7A4E00;font-weight:500">занята до 13:30</span></p>
+            <span class="go"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px"><circle cx="6" cy="18.5" r="2"/><circle cx="18" cy="5.5" r="2"/><path d="M8 18.5h8.5a3.25 3.25 0 0 0 0-6.5h-9a3.25 3.25 0 0 1 0-6.5H16"/></svg>Маршрут</span>
+          </a>
+        </div>
+      </div>
+
+      <div style="flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:16px">
+        <section style="background:#15171C;color:#FFFFFF;border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:10px">
+          <p class="ov" style="color:#A2AAB8">Ваше окно</p>
+          <p style="font:700 32px/38px 'JetBrains Mono',monospace;letter-spacing:-.02em">13:00–14:20</p>
+          <p class="bs" style="color:#A2AAB8">1 ч 20 мин. После окна: английский язык, ауд. <span style="color:#FF6A3D;font-weight:600">204</span></p>
+        </section>
+        <section style="background:#DDF0EB;border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;gap:12px">
+          <div class="row" style="gap:10px;align-items:flex-start">
+            <svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="color:#0C6E5F;margin-top:1px"><path d="M12 3.5l1.9 5.1 5.1 1.9-5.1 1.9L12 17.5l-1.9-5.1L5 10.5l5.1-1.9z"/><path d="M18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/></svg>
+            <p class="bm">Ближе всего — ауд. 214: одна минута до следующей пары.</p>
+          </div>
+          <a class="chip" href="AssistantRooms.dc.html" style="align-self:flex-start">Спросить ассистента</a>
+        </section>
+      </div>
+
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":920}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

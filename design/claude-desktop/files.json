@@ -1,0 +1,291 @@
+{
+  "ver": "1794294733-9b97",
+  "files": {
+    "SKILL.md": {
+      "sha256": "6ba790a1bcbdf096bdb525d5368e0648cecea28ee94222d48bff5bfafcd27f64",
+      "size": 16906,
+      "contentType": "text/markdown"
+    },
+    "artifact-type/app.css": {
+      "sha256": "bb1bc4f5bd334824868d631e57fab77de4c5e2ecf9972291f4442f7fc30c5574",
+      "size": 539387,
+      "contentType": "text/css"
+    },
+    "artifact-type/app.js": {
+      "sha256": "5e96c9bf7259eaa0152b972145ca47df45cb4eb5619469f589a8613b56d3b380",
+      "size": 5072315,
+      "contentType": "text/javascript"
+    },
+    "artifact-type/capture.js": {
+      "sha256": "5ef63dd465d2be9782c7496d9eb06bd45859a6e48fc9bd00f282120d1ce53b20",
+      "size": 867375,
+      "contentType": "text/javascript"
+    },
+    "artifact-type/dc-runtime.js": {
+      "sha256": "b795ee21261f2e7da1b10cb25b4a4cfa275d1b96165f89396f1fed426e191844",
+      "size": 188749,
+      "contentType": "text/javascript"
+    },
+    "artifact-type/fast-edit-worker.js": {
+      "sha256": "1a6f8630deabd56ba2316f684d18261c81332980a74a2285827a11f324bee345",
+      "size": 978136,
+      "contentType": "text/javascript"
+    },
+    "artifact-type/fonts/anthropicons-variable.woff2": {
+      "sha256": "0031da8e9104061ea27d074b335cd72911b6a6c97720cd4c65bc3b4574f3d122",
+      "size": 153812,
+      "contentType": "font/woff2"
+    },
+    "artifact-type/i18n/de-DE.js": {
+      "sha256": "49ea1bdbf48373331e60ba41e36f4f803be206bb47de650fbffebcfc26363bb4",
+      "size": 218925,
+      "contentType": "text/javascript"
+    },
+    "artifact-type/i18n/es-419.js": {
+      "sha256": "4076f31c6657b447732e6f8bdb39c5abe10842b0690559f679863feeff74caab",
+      "size": 229113,
+      "contentType": "text/javascript"
+    },
+    "artifact-type/i18n/es-ES.js": {
+      "sha256": "1ccddff77cc6d6a81d6f28adae64188fcfb0e67da41f0ba62c150f9930cf9e9d",
+      "size": 232823,
+      "contentType": "text/javascript"
+    },
+    "artifact-type/i18n/fr-FR.js": {
+      "sha256": "721354d23dc4b2f884db8c1c44fd8c3b3814755f3a32c46ef764d19d494b0e9d",
+      "size": 248044,
+      "contentType": "text/javascript"
+    },
+    "artifact-type/i18n/hi-IN.js": {
+      "sha256": "8e53f8599ae94e19ecf7ceaa03c639f4ed9d1cff463886b3e3f85a84382c5e14",
+      "size": 401074,
+      "contentType": "text/javascript"
+    },
+    "artifact-type/i18n/id-ID.js": {
+      "sha256": "94f36444aa0a218af5b5e81bb5d29828e20709a5ea00ad4b0987134b5f5effc0",
+      "size": 177466,
+      "contentType": "text/javascript"
+    },
+    "artifact-type/i18n/it-IT.js": {
+      "sha256": "3d66bb5ada7a58da17f3a47d495e73079bebe42feacfc2dc931100a53ec76ceb",
+      "size": 237535,
+      "contentType": "text/javascript"
+    },
+    "artifact-type/i18n/ja-JP.js": {
+      "sha256": "1e3256d576844ab1bee19dd3b7643f0ae5254d9c3fd2665a38f3ca18ceea36a2",
+      "size": 237466,
+      "contentType": "text/javascript"
+    },
+    "artifact-type/i18n/ko-KR.js": {
+      "sha256": "c0d59f7ec8f94b0559203066367c46b1bbcc06d561bab3f0c0a61e49c57ccd11",
+      "size": 212898,
+      "contentType": "text/javascript"
+    },
+    "artifact-type/i18n/pt-BR.js": {
+      "sha256": "820c19261c44d56c1afb057073f4b0d5a5feaf84e9c8eef717b37a3bd00bdd79",
+      "size": 225985,
+      "contentType": "text/javascript"
+    },
+    "artifact-type/reference/brand-colors.md": {
+      "sha256": "f451f1e68b640f2bbe4d15420339ddcb7a84595cb7d12e888caa1a6bd5bd4b3a",
+      "size": 2234,
+      "contentType": "text/markdown"
+    },
+    "artifact-type/reference/brand-typography.md": {
+      "sha256": "d3aa7f635e355d674680a54fe305d4efc66463c25ec04e0a1243f8937a9ece20",
+      "size": 1534,
+      "contentType": "text/markdown"
+    },
+    "artifact-type/reference/craft.md": {
+      "sha256": "d06fedf074bac0ac5aeeac16afb6dd88a1b4d9d8d774cf97a40a5e803922880b",
+      "size": 16105,
+      "contentType": "text/markdown"
+    },
+    "artifact-type/reference/design-system-components.md": {
+      "sha256": "be6d36c90371cd28dccc509d4e1cf7bd65f1b8253de8cd4d084123303dcebdb7",
+      "size": 12348,
+      "contentType": "text/markdown"
+    },
+    "artifact-type/reference/diagrams.md": {
+      "sha256": "c5747e7ab8d8bd04e7ac484f10be02728b9f8f2df1c024024d1d218be9bb20a7",
+      "size": 9638,
+      "contentType": "text/markdown"
+    },
+    "artifact-type/reference/format.md": {
+      "sha256": "b509b31cc2db41a7ddc247f67b164c0f6f755e3f07d909ad3baf20a27718b771",
+      "size": 11295,
+      "contentType": "text/markdown"
+    },
+    "artifact-type/reference/google-fonts-families.json": {
+      "sha256": "82a204043c9adf9d3134fa1850513921b4269a3358671a2d6d8831f447b2ed4c",
+      "size": 26440,
+      "contentType": "application/json"
+    },
+    "artifact-type/reference/google-fonts-notices.json": {
+      "sha256": "b764de9e3b7a62974d60604d0a051a014a9a8e070001835a0964782473b6af64",
+      "size": 60582,
+      "contentType": "application/json"
+    },
+    "artifact-type/reference/google-fonts-reserved.json": {
+      "sha256": "ce9fc8edddf7222dab49edbdae00b8f7f2bc9c99c8832648e61dd93a0140f9be",
+      "size": 7403,
+      "contentType": "application/json"
+    },
+    "artifact-type/reference/make-from-this.md": {
+      "sha256": "8089c8f1771fd14a5690f83112174af1fe42fdd2809709b03e4f0579ab94e645",
+      "size": 2014,
+      "contentType": "text/markdown"
+    },
+    "artifact-type/reference/print.md": {
+      "sha256": "f2b00538b800f8c3d1456baa916c72db1f2ab82c0ea886b0a3ef8c7a7d3e7c07",
+      "size": 5827,
+      "contentType": "text/markdown"
+    },
+    "artifact-type/reference/questions.md": {
+      "sha256": "34139a6b25e7b6048b8c98afbb7892116c9c3dc7369f22b5cf9c88d06cab108e",
+      "size": 4419,
+      "contentType": "text/markdown"
+    },
+    "artifact-type/reference/shaders.md": {
+      "sha256": "191622028fec8b73b874b907df95bd4c760d26bd591b6605e9ad672fdf1e3158",
+      "size": 15999,
+      "contentType": "text/markdown"
+    },
+    "artifact-type/reference/view-state.md": {
+      "sha256": "f34d2845026a3d865069b9bb659fc7f1aeead11fd1c259c2897d5d120014c012",
+      "size": 8925,
+      "contentType": "text/markdown"
+    },
+    "artifact-type/third-party-licenses.js": {
+      "sha256": "e3f702b8f7dd226f0a2d880c7f1d2b3df1f6ce7d9879db63b4cb27a2d6a69516",
+      "size": 42272,
+      "contentType": "text/javascript"
+    },
+    "artifact-type/thumbnail/thumbnail.json": {
+      "sha256": "6d294043f0a63e58d6ef406ecce7acad120b5f6036edbdf00d2d95cac71ff56b",
+      "size": 1628,
+      "contentType": "application/json"
+    },
+    "index.html": {
+      "sha256": "4bfb12269978afcafdaee6eade39832fdfacb9b3dd5c76fa43ff850ac549d9fd",
+      "size": 46925,
+      "contentType": "text/html"
+    },
+    "project/AssistantPlan.dc.html": {
+      "sha256": "f47df42bba962acd3096972e1ed096f1a6f0feb26c2c9e2197e66eea2c209592",
+      "size": 12754,
+      "contentType": "text/html"
+    },
+    "project/AssistantRooms.dc.html": {
+      "sha256": "25dd6a2327065aee06f191ad8315083447b55f18abc23e40240d38b7308844e6",
+      "size": 11636,
+      "contentType": "text/html"
+    },
+    "project/Grades.dc.html": {
+      "sha256": "eefb4f16c716079124fc66a46182db0724f5154435a47ca48328c68519876682",
+      "size": 12533,
+      "contentType": "text/html"
+    },
+    "project/Login.dc.html": {
+      "sha256": "d58aa66db40c0b167cb2c668afd8b0df2011c95f68f9c406a80eb619d15ec375",
+      "size": 10965,
+      "contentType": "text/html"
+    },
+    "project/Main.dc.html": {
+      "sha256": "d62ce42fdf2a53a09cb16c7b012e6dd0881d7f68959c49155e92e119a7fc5745",
+      "size": 16051,
+      "contentType": "text/html"
+    },
+    "project/ModalDemo.dc.html": {
+      "sha256": "e451be80c09657862f4625b064c23c4cba2c858524aae2f0381fbe64231381e3",
+      "size": 7594,
+      "contentType": "text/html"
+    },
+    "project/ModalEmail.dc.html": {
+      "sha256": "4516bf7af0a19365954d7e1aa38129f3a4c0133efce9609c9cac65c8513ccd34",
+      "size": 7308,
+      "contentType": "text/html"
+    },
+    "project/ModalNotifications.dc.html": {
+      "sha256": "9c93a068fd3bc00bb0f74d0802d835d723e1f5a07faefb93e81b40ffde38840d",
+      "size": 6610,
+      "contentType": "text/html"
+    },
+    "project/ModalPortal.dc.html": {
+      "sha256": "f1f000dd139f602265c01f6a9da81b0cf6d813f4f374e9a03387d25bffe554ba",
+      "size": 5519,
+      "contentType": "text/html"
+    },
+    "project/ModalRoute.dc.html": {
+      "sha256": "c52766c1b026e217823dfc8d78e941110a8ea4f057cc0854037c42e7bfedc06b",
+      "size": 7862,
+      "contentType": "text/html"
+    },
+    "project/ModalSearch.dc.html": {
+      "sha256": "834db0a025013306c10d7e57e27a714b3d2f02391b9e1f116109f2392d24bb59",
+      "size": 7187,
+      "contentType": "text/html"
+    },
+    "project/ModalTask.dc.html": {
+      "sha256": "ff4a080848340558585b1bfee533afaafc984473ac959d3db58f989887b8b4f5",
+      "size": 7775,
+      "contentType": "text/html"
+    },
+    "project/Quiz.dc.html": {
+      "sha256": "692615373464e02437025eca7eb685bf2d705c2bc18b346b9229d264b7bd742f",
+      "size": 7909,
+      "contentType": "text/html"
+    },
+    "project/Rooms.dc.html": {
+      "sha256": "1ff3c73695709549761daf5a9b79ceadd94758940b529ce99ecc0f48ab108241",
+      "size": 10206,
+      "contentType": "text/html"
+    },
+    "project/ScheduleChange.dc.html": {
+      "sha256": "f72c5cc20b060a72834e576ee3819169a23754fc4a0fbf6cfdb996e2c8e4d490",
+      "size": 17401,
+      "contentType": "text/html"
+    },
+    "project/ScheduleLesson.dc.html": {
+      "sha256": "fd79d20363cdc380d5363c856a3ae7628f022aa47b7806c6c061e2f6ea1b69fb",
+      "size": 17413,
+      "contentType": "text/html"
+    },
+    "project/Session.dc.html": {
+      "sha256": "50a5fe62adfbfea0f85f9dae2eaf60472a76a6fcc650af84beca77046b660715",
+      "size": 9733,
+      "contentType": "text/html"
+    },
+    "project/Settings.dc.html": {
+      "sha256": "3ee09ba5b55a999c6e7fca1d5a0656ba530c5df1b9cee38d05a0ee67f8ed687f",
+      "size": 10525,
+      "contentType": "text/html"
+    },
+    "project/Sidebar.dc.html": {
+      "sha256": "447b2e240c87961f63398f03fd89ce05efee168bb24d4f59146f2b572c8c7fb8",
+      "size": 8677,
+      "contentType": "text/html"
+    },
+    "project/Tasks.dc.html": {
+      "sha256": "94d235b423a4fbe68845ce5d9be7638804b8e2cfa577554484e16577cb42f8f1",
+      "size": 10877,
+      "contentType": "text/html"
+    },
+    "project/Teachers.dc.html": {
+      "sha256": "1b826350cc4fb2b830d2074563225a45c0d6810a614cd2096db62e97aa15f401",
+      "size": 10174,
+      "contentType": "text/html"
+    },
+    "project/Topbar.dc.html": {
+      "sha256": "99b23dc0ce1f05a6e3a33bd5bc2ee738b37004c411885333ece8a6638ad02ad0",
+      "size": 3909,
+      "contentType": "text/html"
+    },
+    "project/canvas.json": {
+      "sha256": "49b15014d9a3294edb98721c1b719f98e83d348232442fd6197b5d688f794374",
+      "size": 5365,
+      "contentType": "application/json"
+    }
+  },
+  "narrowed": true
+}

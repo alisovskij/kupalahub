@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Вход — Kupala Hub</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&amp;family=Onest:wght@400;500;600&amp;family=Unbounded:wght@500;600&amp;display=swap">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#F3F5F8;color:#15171C;font-family:Onest,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#0C6E5F;text-decoration:none}a:hover{color:#095A4E}
+:focus-visible{outline:2px solid #0C6E5F;outline-offset:2px}
+h1,h2,h3,p,ul,ol{margin:0}ul,ol{padding:0;list-style:none}
+.dm{font:600 22px/28px Unbounded,sans-serif;letter-spacing:-.01em}
+.ts{font:600 15px/20px Onest,sans-serif}
+.bl{font:400 16px/23px Onest,sans-serif}
+.bm{font:400 15px/21px Onest,sans-serif}
+.bs{font:400 13px/18px Onest,sans-serif}
+.lm{font:500 14px/18px Onest,sans-serif}
+.ls{font:500 12px/16px Onest,sans-serif}
+.cap{font:500 12px/16px Onest,sans-serif}
+.ov{font:600 11px/14px Onest,sans-serif;letter-spacing:.06em;text-transform:uppercase}
+.mm{font:500 15px/20px 'JetBrains Mono',monospace}
+.mms{font:500 12px/16px 'JetBrains Mono',monospace}
+.mu{color:#5F6878}.m2{color:#475161}
+.i{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.row{display:flex;align-items:center;gap:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:12px;border:1px solid transparent;font:600 14px/18px Onest,sans-serif;white-space:nowrap;cursor:pointer;text-decoration:none}
+.bp{background:#0C6E5F;color:#FFFFFF}.bp:hover{background:#095A4E;color:#FFFFFF}
+.b2{background:#FFFFFF;color:#15171C;border-color:#C9D0DA}.b2:hover{background:#ECEFF3;color:#15171C}
+.bgh{background:transparent;color:#0C6E5F}.bgh:hover{background:#DDF0EB;color:#095A4E}
+.chip{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:40px;min-width:44px;padding:0 16px;border-radius:999px;border:1px solid #C9D0DA;background:#FFFFFF;color:#15171C;font:500 14px/18px Onest,sans-serif;cursor:pointer}
+.chip:hover{background:#ECEFF3}
+.chip.on{background:#0C6E5F;border-color:#0C6E5F;color:#FFFFFF}
+.badge{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 8px;border-radius:6px;font:600 11px/14px Onest,sans-serif;white-space:nowrap}
+fieldset{border:0;margin:0;padding:0;min-width:0}
+legend{padding:0;margin-bottom:8px;font:500 12px/16px Onest,sans-serif;color:#475161}
+.opt{display:flex;align-items:center;gap:12px;min-height:58px;padding:8px 14px;border:1px solid #E2E6EC;border-radius:12px;background:#FFFFFF;cursor:pointer}
+.opt:hover{border-color:#C9D0DA}
+.opt input{width:18px;height:18px;margin:0;flex:none;accent-color:#0C6E5F}
+.selbox{position:relative;display:flex;align-items:center}
+.selbox select{width:100%;height:44px;padding:0 40px 0 14px;border:1px solid #8A94A4;border-radius:12px;background:#FFFFFF;font:400 15px/21px Onest,sans-serif;color:#15171C;appearance:none;-webkit-appearance:none}
+.selbox svg{position:absolute;right:12px;pointer-events:none}
+.srch{display:flex;align-items:center;gap:10px;height:46px;padding:0 14px;border:1px solid #8A94A4;border-radius:12px;background:#FFFFFF}
+.srch input{flex:1;min-width:0;border:0;outline:0;background:transparent;font:400 15px/21px Onest,sans-serif;color:#15171C}
+.srch:focus-within{border-color:#0C6E5F;box-shadow:0 0 0 3px #DDF0EB}
+.brd{display:grid;grid-template-columns:52px minmax(0,1fr) auto 70px;align-items:center;gap:12px;padding:12px 0;border-top:1px solid #333944}
+</style>
+</helmet>
+<div style="min-height:100vh;display:flex;flex-wrap:wrap;background:#F3F5F8">
+
+  <section style="flex:1 1 480px;max-width:640px;background:#15171C;color:#FFFFFF;padding:40px 48px;display:flex;flex-direction:column;gap:28px">
+    <div class="row">
+      <span aria-hidden="true" style="width:40px;height:40px;flex:none;border-radius:11px;background:#0C6E5F;display:flex;align-items:center;justify-content:center;font:600 18px/1 Unbounded,sans-serif">K</span>
+      <span style="display:flex;flex-direction:column;gap:2px">
+        <span style="font:600 16px/20px Unbounded,sans-serif">Kupala Hub</span>
+        <span class="bs" style="color:#A2AAB8">для студентов ГрГУ имени Янки Купалы</span>
+      </span>
+    </div>
+    <div style="flex:1"></div>
+    <div style="display:flex;flex-direction:column;gap:14px;max-width:470px">
+      <h2 style="font:600 36px/42px Unbounded,sans-serif;letter-spacing:-.02em">Учёба без лишних вкладок</h2>
+      <p class="bl" style="color:#A2AAB8">Расписание, изменения, задания и ИИ-ассистент в одном окне. Расписание берётся из открытого API университета.</p>
+    </div>
+    <div aria-label="Пример табло на сегодня" style="background:#252A34;border-radius:16px;padding:16px 20px 6px">
+      <div class="row" style="justify-content:space-between;padding-bottom:12px">
+        <span class="ov" style="color:#A2AAB8">Табло · вт, 10 ноября</span>
+        <span class="mms" style="color:#FF6A3D">10:47</span>
+      </div>
+      <div class="brd">
+        <span class="mm">10:05</span>
+        <span class="lm">Базы данных</span>
+        <span class="mm" style="color:#FF6A3D">312</span>
+        <span class="badge" style="background:#FF6A3D;color:#15171C;justify-self:end">сейчас</span>
+      </div>
+      <div class="brd">
+        <span class="mm">11:40</span>
+        <span class="lm">Веб-программирование</span>
+        <span class="mm">115</span>
+        <span></span>
+      </div>
+      <div class="brd">
+        <span class="mm">14:20</span>
+        <span class="lm">Английский язык</span>
+        <span class="mm">204</span>
+        <span class="badge" style="background:#F2B23C;color:#15171C;justify-self:end">изм.</span>
+      </div>
+    </div>
+    <div style="flex:1"></div>
+    <p class="cap" style="color:#A2AAB8">Оценки, задания и оплата в демо — тестовые данные.</p>
+  </section>
+
+  <section style="flex:999 1 480px;display:flex;align-items:center;justify-content:center;padding:32px">
+    <div style="width:100%;max-width:440px;display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <h1 class="dm">Найдите свою группу</h1>
+        <p class="bm m2">Пароль не нужен: расписание открыто. Подгруппу можно поменять позже.</p>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <label for="gq" class="ls m2">Номер группы</label>
+        <div class="srch">
+          <svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="color:#5F6878"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.4-4.4"/></svg>
+          <input id="gq" type="search" placeholder="Например, ПИ-31" autocomplete="off">
+        </div>
+      </div>
+
+      <div class="row" style="gap:12px">
+        <span aria-hidden="true" style="flex:1;height:1px;background:#E2E6EC"></span>
+        <span class="ls mu">или выберите по шагам</span>
+        <span aria-hidden="true" style="flex:1;height:1px;background:#E2E6EC"></span>
+      </div>
+
+      <div style="display:flex;gap:28px;flex-wrap:wrap">
+        <fieldset>
+          <legend>Форма обучения</legend>
+          <div class="row" style="gap:8px;flex-wrap:wrap">
+            <button type="button" class="chip on" aria-pressed="true">Дневная</button>
+            <button type="button" class="chip" aria-pressed="false">Заочная</button>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Курс</legend>
+          <div class="row" style="gap:8px;flex-wrap:wrap">
+            <button type="button" class="chip" aria-pressed="false">1</button>
+            <button type="button" class="chip" aria-pressed="false">2</button>
+            <button type="button" class="chip on" aria-pressed="true">3</button>
+            <button type="button" class="chip" aria-pressed="false">4</button>
+          </div>
+        </fieldset>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <label for="fac" class="ls m2">Факультет</label>
+        <div class="selbox">
+          <select id="fac">
+            <option>Математики и информатики</option>
+            <option>Физико-технический</option>
+            <option>Экономики и управления</option>
+            <option>Истории, коммуникации и туризма</option>
+          </select>
+          <svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="color:#475161"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+      </div>
+
+      <fieldset>
+        <legend>Группа</legend>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <label class="opt" style="border:1.5px solid #0C6E5F;background:#DDF0EB">
+            <input type="radio" name="grp" checked="{{ true }}">
+            <span style="display:flex;flex-direction:column"><span class="ts">ПИ-31</span><span class="bs m2">Программная инженерия</span></span>
+          </label>
+          <label class="opt">
+            <input type="radio" name="grp">
+            <span style="display:flex;flex-direction:column"><span class="ts">ПИ-32</span><span class="bs m2">Программная инженерия</span></span>
+          </label>
+          <label class="opt">
+            <input type="radio" name="grp">
+            <span style="display:flex;flex-direction:column"><span class="ts">ПМ-31</span><span class="bs m2">Прикладная математика</span></span>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Подгруппа</legend>
+        <div class="row" style="gap:8px">
+          <button type="button" class="chip on" aria-pressed="true">1</button>
+          <button type="button" class="chip" aria-pressed="false">2</button>
+        </div>
+      </fieldset>
+
+      <div style="display:flex;flex-direction:column;gap:8px;padding-top:4px">
+        <a class="btn bp" href="Main.dc.html">Продолжить</a>
+        <a class="btn b2" href="ModalPortal.dc.html">Войти по логину портала</a>
+        <a class="btn bgh" href="Main.dc.html" style="min-height:36px">Посмотреть демо</a>
+      </div>
+    </div>
+  </section>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":920}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

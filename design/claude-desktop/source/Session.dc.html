@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Учёба · сессия — Kupala Hub</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&amp;family=Onest:wght@400;500;600&amp;family=Unbounded:wght@500;600&amp;display=swap">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#F3F5F8;color:#15171C;font-family:Onest,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#0C6E5F;text-decoration:none}a:hover{color:#095A4E}
+:focus-visible{outline:2px solid #0C6E5F;outline-offset:2px}
+h1,h2,h3,p,ul,ol{margin:0}ul,ol{padding:0;list-style:none}
+.tm{font:600 17px/22px Onest,sans-serif}
+.ts{font:600 15px/20px Onest,sans-serif}
+.bm{font:400 15px/21px Onest,sans-serif}
+.bs{font:400 13px/18px Onest,sans-serif}
+.lm{font:500 14px/18px Onest,sans-serif}
+.ls{font:500 12px/16px Onest,sans-serif}
+.cap{font:500 12px/16px Onest,sans-serif}
+.ov{font:600 11px/14px Onest,sans-serif;letter-spacing:.06em;text-transform:uppercase}
+.mm{font:500 15px/20px Onest,sans-serif;font-variant-numeric:tabular-nums}
+.mms{font:500 12px/16px 'JetBrains Mono',monospace}
+.mu{color:#5F6878}.m2{color:#475161}
+.i{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.card{background:#FFFFFF;border:1px solid #E2E6EC;border-radius:16px}
+.row{display:flex;align-items:center;gap:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:12px;border:1px solid transparent;font:600 14px/18px Onest,sans-serif;white-space:nowrap;cursor:pointer;text-decoration:none}
+.bp{background:#0C6E5F;color:#FFFFFF}.bp:hover{background:#095A4E;color:#FFFFFF}
+.badge{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 8px;border-radius:6px;font:600 11px/14px Onest,sans-serif;white-space:nowrap}
+.b-ok{background:#DDF1E4;color:#1E7A45}.b-demo{background:#ECE6FB;color:#5A3DB0}.b-sem{background:#EBEEF2;color:#475161}.b-lec{background:#DDF0EB;color:#0C6E5F}.b-bad{background:#FDE7E4;color:#B42318}
+.tab{display:inline-flex;align-items:center;height:44px;padding:0 14px;margin-bottom:-1px;border-bottom:2px solid transparent;font:500 14px/18px Onest,sans-serif;color:#475161;text-decoration:none}
+.tab:hover{color:#15171C}
+.tab.on{color:#0C6E5F;font-weight:600;border-bottom-color:#0C6E5F}
+.ex{display:grid;grid-template-columns:64px 84px minmax(0,1fr) 200px;align-items:center;gap:16px;padding:16px 20px;border-top:1px solid #E2E6EC}
+.bar{flex:1;height:6px;border-radius:3px;background:#ECEFF3;overflow:hidden}
+.bar span{display:block;height:100%;border-radius:3px;background:#0C6E5F}
+</style>
+</helmet>
+<div style="min-height:100vh;display:flex;flex-wrap:wrap;align-items:stretch;background:#F3F5F8">
+  <div style="flex:1 1 248px;background:#F3F5F8;border-right:1px solid #E2E6EC">
+    <dc-import name="Sidebar" active="study" hint-size="100%,880px"></dc-import>
+  </div>
+  <main style="flex:999 1 560px;min-width:0;display:flex;flex-direction:column">
+    <dc-import name="Topbar" heading="Учёба" subheading="Зимняя сессия · с 5 января" hint-size="100%,72px"></dc-import>
+    <div style="padding:8px 32px 32px;display:flex;flex-direction:column;gap:20px">
+
+      <div class="row" style="justify-content:space-between;flex-wrap:wrap;border-bottom:1px solid #E2E6EC">
+        <nav aria-label="Разделы учёбы" style="display:flex;gap:4px">
+          <a class="tab" href="Grades.dc.html">Оценки</a>
+          <a class="tab" href="Tasks.dc.html">Задания</a>
+          <a class="tab on" href="Session.dc.html" aria-current="page">Сессия</a>
+        </nav>
+        <a class="badge b-demo" href="ModalDemo.dc.html" style="height:28px;padding:0 10px;margin-bottom:8px">
+          <svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:14px;height:14px"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.5h.01"/></svg>
+          Оценки, задания и сессия — демо-данные
+        </a>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start">
+        <section class="card" style="flex:999 1 560px;min-width:0;overflow-x:auto">
+          <div style="min-width:600px">
+            <div class="row" style="justify-content:space-between;padding:18px 20px">
+              <h2 class="tm">Зачёты и экзамены</h2>
+              <span class="mms mu">5–17 января</span>
+            </div>
+            <div class="ex" style="padding-top:10px;padding-bottom:10px">
+              <span class="ls mu">Дата</span><span class="ls mu">Форма</span><span class="ls mu">Дисциплина</span><span class="ls mu">Текущий балл</span>
+            </div>
+            <div class="ex">
+              <span class="mm">05.01</span>
+              <span><span class="badge b-sem">Зачёт</span></span>
+              <span class="ts">Философия</span>
+              <span><span class="badge b-ok"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:12px;height:12px"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Допуск получен</span></span>
+            </div>
+            <div class="ex">
+              <span class="mm">06.01</span>
+              <span><span class="badge b-sem">Зачёт</span></span>
+              <span class="ts">Английский язык</span>
+              <span class="row" style="gap:10px"><span class="bar" aria-hidden="true"><span style="width:80%"></span></span><span class="mm" style="font-weight:700;width:36px;text-align:right">8,0</span></span>
+            </div>
+            <div class="ex" style="background:#FDE7E4">
+              <span class="mm">09.01</span>
+              <span><span class="badge b-lec">Экзамен</span></span>
+              <span style="display:flex;flex-direction:column;gap:3px">
+                <span class="ts">Теория вероятностей</span>
+                <span class="cap" style="color:#B42318">Зона риска · самый низкий балл</span>
+              </span>
+              <span class="row" style="gap:10px"><span class="bar" aria-hidden="true" style="background:#FFFFFF"><span style="width:60%;background:#B42318"></span></span><span class="mm" style="font-weight:700;width:36px;text-align:right;color:#B42318">6,0</span></span>
+            </div>
+            <div class="ex">
+              <span class="mm">13.01</span>
+              <span><span class="badge b-lec">Экзамен</span></span>
+              <span class="ts">Базы данных</span>
+              <span class="row" style="gap:10px"><span class="bar" aria-hidden="true"><span style="width:80%"></span></span><span class="mm" style="font-weight:700;width:36px;text-align:right">8,0</span></span>
+            </div>
+            <div class="ex">
+              <span class="mm">17.01</span>
+              <span><span class="badge b-lec">Экзамен</span></span>
+              <span class="ts">Веб-программирование</span>
+              <span class="row" style="gap:10px"><span class="bar" aria-hidden="true"><span style="width:93%"></span></span><span class="mm" style="font-weight:700;width:36px;text-align:right">9,3</span></span>
+            </div>
+          </div>
+        </section>
+
+        <div style="flex:1 1 340px;min-width:0;display:flex;flex-direction:column;gap:16px">
+          <section style="background:#15171C;color:#FFFFFF;border-radius:20px;padding:22px;display:flex;flex-direction:column;gap:14px">
+            <p class="ov" style="color:#A2AAB8">До сессии</p>
+            <div style="display:flex;align-items:flex-end;gap:12px">
+              <span style="font:700 64px/64px 'JetBrains Mono',monospace;letter-spacing:-.03em;color:#FF6A3D">56</span>
+              <span style="display:flex;flex-direction:column;gap:2px;padding-bottom:6px">
+                <span class="ts">дней</span>
+                <span class="cap" style="color:#A2AAB8">с 5 января</span>
+              </span>
+            </div>
+            <p class="bs" style="color:#A2AAB8">3 экзамена и 2 зачёта. Самый рискованный — теория вероятностей.</p>
+            <a class="btn bp" href="AssistantPlan.dc.html" style="align-self:stretch">
+              <svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:18px;height:18px"><path d="M12 3.5l1.9 5.1 5.1 1.9-5.1 1.9L12 17.5l-1.9-5.1L5 10.5l5.1-1.9z"/><path d="M18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/></svg>
+              Составить план подготовки
+            </a>
+          </section>
+
+          <section style="background:#ECE6FB;border-radius:16px;padding:16px 18px;display:flex;gap:12px">
+            <svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="color:#5A3DB0;margin-top:1px"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.5h.01"/></svg>
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <p class="ts" style="color:#5A3DB0">Даты в демо условные</p>
+              <p class="bs m2">Расписание сессии пока не приходит из открытого API — когда появится, даты подтянутся сами.</p>
+            </div>
+          </section>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":920}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

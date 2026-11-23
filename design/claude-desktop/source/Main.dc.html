@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Сегодня — Kupala Hub</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&amp;family=Onest:wght@400;500;600&amp;family=Unbounded:wght@500;600&amp;display=swap">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#F3F5F8;color:#15171C;font-family:Onest,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#0C6E5F;text-decoration:none}a:hover{color:#095A4E}
+:focus-visible{outline:2px solid #0C6E5F;outline-offset:2px}
+h1,h2,h3,p,ul,ol{margin:0}ul,ol{padding:0;list-style:none}
+.dl{font:600 28px/34px Unbounded,sans-serif;letter-spacing:-.02em}
+.dm{font:600 22px/28px Unbounded,sans-serif;letter-spacing:-.01em}
+.tl{font:600 20px/26px Onest,sans-serif}
+.tm{font:600 17px/22px Onest,sans-serif}
+.ts{font:600 15px/20px Onest,sans-serif}
+.bm{font:400 15px/21px Onest,sans-serif}
+.bs{font:400 13px/18px Onest,sans-serif}
+.lm{font:500 14px/18px Onest,sans-serif}
+.ls{font:500 12px/16px Onest,sans-serif}
+.cap{font:500 12px/16px Onest,sans-serif}
+.ov{font:600 11px/14px Onest,sans-serif;letter-spacing:.06em;text-transform:uppercase}
+.mxl{font:700 40px/44px 'JetBrains Mono',monospace;letter-spacing:-.02em}
+.mm{font:500 15px/20px 'JetBrains Mono',monospace}
+.mms{font:500 12px/16px 'JetBrains Mono',monospace}
+.mu{color:#5F6878}.m2{color:#475161}
+.i{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.card{background:#FFFFFF;border:1px solid #E2E6EC;border-radius:16px}
+.row{display:flex;align-items:center;gap:12px}
+.ibox{width:36px;height:36px;flex:none;border-radius:10px;display:flex;align-items:center;justify-content:center;background:#ECEFF3;color:#15171C}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:12px;border:1px solid transparent;font:600 14px/18px Onest,sans-serif;white-space:nowrap;cursor:pointer;text-decoration:none}
+.bp{background:#0C6E5F;color:#FFFFFF}.bp:hover{background:#095A4E;color:#FFFFFF}
+.b2{background:#FFFFFF;color:#15171C;border-color:#C9D0DA}.b2:hover{background:#ECEFF3;color:#15171C}
+.bgh{background:transparent;color:#0C6E5F}.bgh:hover{background:#DDF0EB;color:#095A4E}
+.sm{min-height:36px;padding:0 12px;border-radius:10px;font-size:13px}
+.chip{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 14px;border-radius:999px;border:1px solid #C9D0DA;background:#FFFFFF;color:#15171C;font:500 13px/16px Onest,sans-serif;cursor:pointer;text-decoration:none}
+.chip:hover{background:#ECEFF3;color:#15171C}
+.badge{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 8px;border-radius:6px;font:600 11px/14px Onest,sans-serif;white-space:nowrap}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.field{display:flex;align-items:center;gap:10px;min-height:44px;padding:0 14px;border:1px solid #8A94A4;border-radius:12px;background:#FFFFFF}
+.field input{flex:1;min-width:0;border:0;outline:0;background:transparent;font:400 14px/20px Onest,sans-serif;color:#15171C}
+.field:focus-within{border-color:#0C6E5F;box-shadow:0 0 0 3px #DDF0EB}
+.blk{position:absolute;z-index:1;top:0;bottom:0;width:calc(16.667% - 4px);border-radius:10px;padding:8px 10px;display:flex;flex-direction:column;justify-content:space-between;overflow:hidden}
+</style>
+</helmet>
+<div style="min-height:100vh;display:flex;flex-wrap:wrap;align-items:stretch;background:#F3F5F8">
+  <div style="flex:1 1 248px;background:#F3F5F8;border-right:1px solid #E2E6EC">
+    <dc-import name="Sidebar" active="today" hint-size="100%,880px"></dc-import>
+  </div>
+  <main style="flex:999 1 560px;min-width:0;display:flex;flex-direction:column">
+    <dc-import name="Topbar" heading="Привет, Аня" subheading="Вторник, 10 ноября · неделя 11 · ПИ-31" hint-size="100%,72px"></dc-import>
+    <div style="padding:8px 32px 32px;display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start">
+
+      <div style="flex:999 1 560px;min-width:0;display:flex;flex-direction:column;gap:20px">
+
+        <section aria-label="Сейчас и далее" style="background:#15171C;color:#FFFFFF;border-radius:20px;padding:24px;display:flex;flex-wrap:wrap;gap:24px">
+          <div style="flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:16px">
+            <div class="row" style="gap:10px">
+              <span class="badge" style="background:#FF6A3D;color:#15171C"><span style="width:6px;height:6px;border-radius:50%;background:#15171C"></span>Сейчас</span>
+              <span class="mms" style="color:#A2AAB8">2-я пара · 10:05–11:25</span>
+            </div>
+            <div>
+              <h2 class="dl">Базы данных</h2>
+              <p class="bs" style="color:#A2AAB8;margin-top:4px">Лекция · Ковалёв А. С.</p>
+            </div>
+            <div style="display:flex;align-items:flex-end;gap:32px;flex-wrap:wrap">
+              <div style="display:flex;align-items:flex-end;gap:10px">
+                <span class="mxl">34</span>
+                <span class="cap" style="color:#A2AAB8;white-space:pre-line;padding-bottom:5px">мин
+до конца</span>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:2px">
+                <span class="ov" style="color:#A2AAB8">Аудитория</span>
+                <span class="mxl" style="color:#FF6A3D">312</span>
+                <span class="cap" style="color:#A2AAB8">Главный корпус</span>
+              </div>
+            </div>
+            <div aria-hidden="true" style="height:6px;border-radius:3px;background:#252A34;overflow:hidden">
+              <div style="width:58%;height:100%;border-radius:3px;background:#FF6A3D"></div>
+            </div>
+          </div>
+          <div style="flex:1 1 260px;max-width:300px;border-left:1px solid #252A34;padding-left:24px;display:flex;flex-direction:column;gap:10px">
+            <span class="ov" style="color:#A2AAB8">Далее · 11:40–13:00</span>
+            <h3 class="tl">Веб-программирование</h3>
+            <p class="bs" style="color:#A2AAB8">Практика · подгруппа 1 · Лис Д. Н.</p>
+            <a href="ModalRoute.dc.html" style="margin-top:auto;display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;background:#252A34;color:#FFFFFF">
+              <span class="ibox" style="background:#FF6A3D;color:#15171C"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="18.5" r="2"/><circle cx="18" cy="5.5" r="2"/><path d="M8 18.5h8.5a3.25 3.25 0 0 0 0-6.5h-9a3.25 3.25 0 0 1 0-6.5H16"/></svg></span>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px">
+                <span class="lm">Корпус ФМИ, ауд. 115</span>
+                <span class="cap" style="color:#A2AAB8">12 мин пешком — успеваете</span>
+              </span>
+              <svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="color:#A2AAB8"><path d="M9 6l6 6-6 6"/></svg>
+            </a>
+          </div>
+        </section>
+
+        <section class="card" style="padding:20px 20px 16px;display:flex;flex-direction:column;gap:12px">
+          <div class="row" style="justify-content:space-between;flex-wrap:wrap">
+            <h2 class="tm">Вторник по часам</h2>
+            <a class="btn bgh sm" href="ScheduleLesson.dc.html">Открыть расписание<svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px"><path d="M9 6l6 6-6 6"/></svg></a>
+          </div>
+          <div style="position:relative;height:84px;margin-top:20px;background-image:linear-gradient(to right,#E2E6EC 1px,transparent 1px);background-size:12.5% 100%;border-right:1px solid #E2E6EC">
+            <div class="blk" style="left:6.25%;background:#ECEFF3;color:#5F6878">
+              <span class="ls" style="font-weight:600">Теор. вероятн.</span><span class="mms">08:30</span>
+            </div>
+            <div class="blk" style="left:26.04%;background:#FF6A3D;color:#15171C">
+              <span class="ls" style="font-weight:600">Базы данных</span><span class="mms">10:05 · 312</span>
+            </div>
+            <div class="blk" style="left:45.83%;background:#E0EAFF;color:#2148B0">
+              <span class="ls" style="font-weight:600">Веб-прогр.</span><span class="mms">11:40 · 115</span>
+            </div>
+            <div class="blk" style="left:62.5%;border:1.5px dashed #C9D0DA;color:#475161">
+              <span class="ls" style="font-weight:600">Окно</span><span class="mms">214, 218</span>
+            </div>
+            <div class="blk" style="left:79.17%;background:#FFF1D6;border:1px solid #F2B23C;color:#7A4E00">
+              <span class="ls" style="font-weight:600">Английский</span><span class="mms">204 · изм.</span>
+            </div>
+            <div style="position:absolute;z-index:0;left:34.79%;top:-20px;bottom:-6px;width:2px;background:#FF6A3D">
+              <span class="mms" style="position:absolute;top:-1px;left:6px;padding:0 4px;border-radius:4px;background:#FFE4D9;color:#A8381A">10:47</span>
+            </div>
+          </div>
+          <div class="mms mu" style="position:relative;height:16px">
+            <span style="position:absolute;left:0">08:00</span>
+            <span style="position:absolute;left:25%;transform:translateX(-50%)">10:00</span>
+            <span style="position:absolute;left:50%;transform:translateX(-50%)">12:00</span>
+            <span style="position:absolute;left:75%;transform:translateX(-50%)">14:00</span>
+            <span style="position:absolute;right:0">16:00</span>
+          </div>
+        </section>
+
+        <div style="display:flex;flex-wrap:wrap;gap:20px">
+          <section style="flex:1 1 260px;background:#FFF1D6;border:1px solid #F2B23C;border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:12px">
+            <div class="row" style="gap:10px">
+              <svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="color:#7A4E00"><path d="M12 4 21 19.5H3z"/><path d="M12 10v4.5M12 17h.01"/></svg>
+              <h2 class="ts">2 изменения на неделе</h2>
+            </div>
+            <ul style="display:flex;flex-direction:column;gap:6px">
+              <li class="bs m2">Сегодня: английский язык в ауд. 204 вместо 410</li>
+              <li class="bs m2">Чт 12: английский перенесён на 08:30</li>
+            </ul>
+            <a class="btn b2 sm" href="ScheduleChange.dc.html" style="align-self:flex-start;margin-top:auto">Посмотреть изменения</a>
+          </section>
+          <section class="card" style="flex:1 1 260px;padding:20px;display:flex;flex-direction:column;gap:12px">
+            <div class="row" style="gap:10px">
+              <svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="color:#0C6E5F"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>
+              <h2 class="ts">Окно 13:00–14:20</h2>
+            </div>
+            <p class="bs m2">Свободны ауд. 214 и 218 — рядом с ауд. 204, где следующая пара</p>
+            <a class="btn b2 sm" href="Rooms.dc.html" style="align-self:flex-start;margin-top:auto">Свободные аудитории</a>
+          </section>
+        </div>
+      </div>
+
+      <div style="flex:1 1 360px;min-width:0;display:flex;flex-direction:column;gap:20px">
+        <section class="card" style="padding:20px;display:flex;flex-direction:column;gap:16px">
+          <div class="row">
+            <span class="ibox" style="background:#DDF0EB;color:#0C6E5F"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l1.9 5.1 5.1 1.9-5.1 1.9L12 17.5l-1.9-5.1L5 10.5l5.1-1.9z"/><path d="M18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/></svg></span>
+            <div style="display:flex;flex-direction:column;gap:2px">
+              <h2 class="ts">Ассистент</h2>
+              <p class="bs mu">Отвечает по вашим данным</p>
+            </div>
+          </div>
+          <div style="background:#DDF0EB;border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:6px">
+            <p class="ov" style="color:#0C6E5F">Сводка на утро</p>
+            <p class="bm">4 пары, окно 1 ч 20 мин после обеда. Вечером дедлайн по лабораторной №4. Английский перенесли в ауд. 204.</p>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <a class="chip" href="AssistantRooms.dc.html">Где позаниматься в окно?</a>
+            <a class="chip" href="AssistantPlan.dc.html">План подготовки к сессии</a>
+            <a class="chip" href="Quiz.dc.html">Тест по базам данных</a>
+          </div>
+          <div class="row" style="gap:8px">
+            <label class="field" style="flex:1;min-width:0"><span class="sr">Вопрос ассистенту</span><input type="text" placeholder="Спросите о расписании или учёбе"></label>
+            <a class="btn bp" href="AssistantPlan.dc.html" aria-label="Отправить вопрос" style="width:44px;padding:0"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12 20 4l-5 16-3-7z"/><path d="M12 13l8-9"/></svg></a>
+          </div>
+        </section>
+
+        <section class="card" style="padding:20px;display:flex;flex-direction:column;gap:8px">
+          <div class="row" style="justify-content:space-between">
+            <h2 class="ts">Задачи на сегодня</h2>
+            <a class="ls" href="Tasks.dc.html" style="font-weight:600">Все задачи</a>
+          </div>
+          <ul style="display:flex;flex-direction:column">
+            <li style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #E2E6EC">
+              <input type="checkbox" id="mt1" style="width:20px;height:20px;margin:0;flex:none;accent-color:#0C6E5F">
+              <label for="mt1" style="display:flex;flex-direction:column;gap:2px"><span class="lm">Отчёт по лабораторной №4</span><span class="bs" style="color:#A8381A">Базы данных · до 23:59</span></label>
+            </li>
+            <li style="display:flex;gap:12px;padding:10px 0;border-bottom:1px solid #E2E6EC">
+              <input type="checkbox" id="mt2" checked="{{ true }}" style="width:20px;height:20px;margin:0;flex:none;accent-color:#0C6E5F">
+              <label for="mt2" style="display:flex;flex-direction:column;gap:2px"><span class="lm mu" style="text-decoration:line-through">Прочитать главу 3</span><span class="bs mu">Теория вероятностей · к четвергу</span></label>
+            </li>
+            <li style="display:flex;gap:12px;padding:10px 0">
+              <input type="checkbox" id="mt3" style="width:20px;height:20px;margin:0;flex:none;accent-color:#0C6E5F">
+              <label for="mt3" style="display:flex;flex-direction:column;gap:2px"><span class="lm">Вопросы к семинару</span><span class="bs mu">Философия · к среде</span></label>
+            </li>
+          </ul>
+          <a class="btn bgh sm" href="ModalTask.dc.html" style="align-self:flex-start"><svg class="i" viewBox="0 0 24 24" aria-hidden="true" style="width:16px;height:16px"><path d="M12 5v14M5 12h14"/></svg>Добавить задачу</a>
+        </section>
+      </div>
+
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":920}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

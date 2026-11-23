@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Уведомления — Kupala Hub</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&amp;family=Onest:wght@400;500;600&amp;family=Unbounded:wght@500;600&amp;display=swap">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#F3F5F8;color:#15171C;font-family:Onest,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#0C6E5F;text-decoration:none}a:hover{color:#095A4E}
+:focus-visible{outline:2px solid #0C6E5F;outline-offset:2px}
+h1,h2,h3,p,ul,ol{margin:0}ul,ol{padding:0;list-style:none}
+.ts{font:600 15px/20px Onest,sans-serif}
+.bs{font:400 13px/18px Onest,sans-serif}
+.lm{font:500 14px/18px Onest,sans-serif}
+.ls{font:500 12px/16px Onest,sans-serif}
+.mms{font:500 12px/16px 'JetBrains Mono',monospace}
+.mu{color:#5F6878}.m2{color:#475161}
+.i{width:20px;height:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.row{display:flex;align-items:center;gap:12px}
+.ibox{width:36px;height:36px;flex:none;border-radius:10px;display:flex;align-items:center;justify-content:center}
+.sk{border-radius:16px;background:#FFFFFF;border:1px solid #E2E6EC}
+.nt{position:relative;display:flex;gap:12px;padding:14px 20px;border-top:1px solid #E2E6EC;color:#15171C;text-decoration:none}
+.nt:hover{background:#F8FAFC;color:#15171C}
+.dot{position:absolute;top:20px;right:20px;width:8px;height:8px;border-radius:50%;background:#FF6A3D}
+</style>
+</helmet>
+<div style="position:relative;min-height:100vh;display:flex;flex-wrap:wrap;align-items:stretch;background:#F3F5F8;overflow:hidden">
+  <div style="flex:1 1 248px;background:#F3F5F8;border-right:1px solid #E2E6EC">
+    <dc-import name="Sidebar" active="today" hint-size="100%,880px"></dc-import>
+  </div>
+  <main style="flex:999 1 560px;min-width:0;display:flex;flex-direction:column">
+    <dc-import name="Topbar" heading="Привет, Аня" subheading="Вторник, 10 ноября · неделя 11 · ПИ-31" hint-size="100%,72px"></dc-import>
+    <div aria-hidden="true" style="padding:8px 32px 32px;display:flex;flex-wrap:wrap;gap:20px">
+      <div style="flex:999 1 560px;display:flex;flex-direction:column;gap:20px">
+        <div style="height:250px;border-radius:20px;background:#15171C"></div>
+        <div class="sk" style="height:200px"></div>
+        <div style="display:flex;gap:20px"><div style="flex:1;height:160px;border-radius:16px;background:#FFF1D6"></div><div class="sk" style="flex:1;height:160px"></div></div>
+      </div>
+      <div style="flex:1 1 360px;display:flex;flex-direction:column;gap:20px">
+        <div class="sk" style="height:400px"></div>
+        <div class="sk" style="height:240px"></div>
+      </div>
+    </div>
+  </main>
+
+  <a href="Main.dc.html" aria-label="Закрыть уведомления" style="position:absolute;inset:0;z-index:10;background:rgba(21,23,28,.18)"></a>
+
+  <section role="dialog" aria-labelledby="nt-h" style="position:absolute;z-index:11;top:76px;right:32px;width:400px;max-width:calc(100% - 32px);background:#FFFFFF;border:1px solid #E2E6EC;border-radius:18px;box-shadow:0 18px 48px rgba(21,23,28,.18);overflow:hidden">
+    <div class="row" style="justify-content:space-between;padding:16px 20px">
+      <h2 class="ts" id="nt-h">Уведомления</h2>
+      <button type="button" class="ls" style="border:0;background:none;padding:6px 8px;border-radius:8px;color:#0C6E5F;font-weight:600;cursor:pointer">Прочитать все</button>
+    </div>
+    <a class="nt" href="ScheduleChange.dc.html">
+      <span class="ibox" style="background:#FFF1D6;color:#7A4E00"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4 21 19.5H3z"/><path d="M12 10v4.5M12 17h.01"/></svg></span>
+      <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;padding-right:16px">
+        <span class="lm" style="font-weight:600">Изменение в расписании</span>
+        <span class="bs m2">Английский язык сегодня в ауд. 204 вместо 410</span>
+        <span class="mms mu">10:12</span>
+      </span>
+      <span class="dot" aria-label="Не прочитано"></span>
+    </a>
+    <a class="nt" href="Tasks.dc.html">
+      <span class="ibox" style="background:#FFE4D9;color:#A8381A"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
+      <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px;padding-right:16px">
+        <span class="lm" style="font-weight:600">Дедлайн сегодня</span>
+        <span class="bs m2">Отчёт по лабораторной №4 · до 23:59</span>
+        <span class="mms mu">09:00</span>
+      </span>
+      <span class="dot" aria-label="Не прочитано"></span>
+    </a>
+    <a class="nt" href="AssistantPlan.dc.html">
+      <span class="ibox" style="background:#DDF0EB;color:#0C6E5F"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5l1.9 5.1 5.1 1.9-5.1 1.9L12 17.5l-1.9-5.1L5 10.5l5.1-1.9z"/><path d="M18.5 15.5l.7 1.8 1.8.7-1.8.7-.7 1.8-.7-1.8-1.8-.7 1.8-.7z"/></svg></span>
+      <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px">
+        <span class="lm">Утренняя сводка</span>
+        <span class="bs mu">4 пары, окно 1 ч 20 мин после обеда</span>
+        <span class="mms mu">07:30</span>
+      </span>
+    </a>
+    <a class="nt" href="ScheduleChange.dc.html">
+      <span class="ibox" style="background:#ECEFF3;color:#475161"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></span>
+      <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px">
+        <span class="lm">Перенос пары</span>
+        <span class="bs mu">Чт 12: английский язык перенесён на 08:30</span>
+        <span class="mms mu">вчера, 18:40</span>
+      </span>
+    </a>
+    <a href="Settings.dc.html" class="row lm" style="justify-content:center;gap:8px;min-height:48px;border-top:1px solid #E2E6EC;font-weight:600">
+      Настроить уведомления
+    </a>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":920}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>
