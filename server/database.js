@@ -2,8 +2,8 @@ import { DatabaseSync } from 'node:sqlite';
 import { mkdirSync } from 'node:fs';
 import { dirname } from 'node:path';
 export function openDatabase(filename) {
-  if(filename!==':memory:') mkdirSync(dirname(filename),{recursive:true,mode:0o700});
-  const db=new DatabaseSync(filename);
+  if (filename !== ':memory:') mkdirSync(dirname(filename), { recursive: true, mode: 0o700 });
+  const db = new DatabaseSync(filename);
   db.exec(`PRAGMA foreign_keys=ON; PRAGMA journal_mode=WAL; PRAGMA busy_timeout=5000;
     CREATE TABLE IF NOT EXISTS users (id TEXT PRIMARY KEY,email TEXT UNIQUE,password TEXT,name TEXT NOT NULL DEFAULT 'Студент',settings TEXT NOT NULL DEFAULT '{}');
     CREATE TABLE IF NOT EXISTS sessions (token TEXT PRIMARY KEY,user_id TEXT NOT NULL REFERENCES users(id),csrf TEXT NOT NULL,expires INTEGER NOT NULL);
@@ -13,4 +13,14 @@ export function openDatabase(filename) {
   `);
   return db;
 }
-export function transaction(db, fn) { db.exec('BEGIN');try{const r=fn();db.exec('COMMIT');return r;}catch(e){db.exec('ROLLBACK');throw e;} }
+export function transaction(db, fn) {
+  db.exec('BEGIN');
+  try {
+    const r = fn();
+    db.exec('COMMIT');
+    return r;
+  } catch (e) {
+    db.exec('ROLLBACK');
+    throw e;
+  }
+}

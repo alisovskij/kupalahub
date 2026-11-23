@@ -1,18 +1,389 @@
-import React,{useState} from 'react';
-import {Plus,Search,Trash2,Pencil,ArrowUpRight} from 'lucide-react';
-import {api} from '../api.js';
-import {useResource,Loading,Failure,Metadata,Tabs,Disconnected,DemoNotice,Table,Dialog,EmptyState,displayDate,safeLink} from './common.jsx';
-export function LearningPage({mode,kind='study'}){
- const [tab,setTab]=useState(kind==='finance'?'finance':'grades'),[demo,setDemo]=useState(false),[revision,setRevision]=useState(0),[semester,setSemester]=useState('all');
- const effective=demo?'demo':mode;const {data,loading,error}=useResource(`/learning?mode=${effective}&tab=${tab}`,revision);
- const tabs=kind==='finance'?[['finance','Оплата и поступления'],['orders','Приказы']]:[['grades','Оценки'],['attestation','Аттестация'],['absences','Пропуски']];
- const items=Array.isArray(data?.items)?data.items:[];const semesters=[...new Set(items.map(i=>i.semester).filter(Boolean))];const rows=semester==='all'?items:items.filter(i=>String(i.semester)===semester);
- return <div className="exp-page"><Tabs items={tabs} value={tab} onChange={v=>{setTab(v);setSemester('all');}}/>{effective==='demo'&&<DemoNotice onBack={demo?()=>setDemo(false):null}/>}<Metadata data={data}/>{loading?<Loading/>:error?<Failure message={error} retry={()=>setRevision(x=>x+1)}/>:data?.status==='disconnected'?<Disconnected onDemo={()=>setDemo(true)}/>:<section className="panel exp-data-panel">{semesters.length>0&&<div className="exp-toolbar"><h2>{tabs.find(t=>t[0]===tab)?.[1]}</h2><label className="inline-label">Семестр<select value={semester} onChange={e=>setSemester(e.target.value)}><option value="all">Все</option>{semesters.map(s=><option key={s} value={s}>{s}</option>)}</select></label></div>}{tab==='absences'?<Table headers={['Дата','Количество','Причина']} rows={rows.map(i=>[displayDate(i.date),`${i.amount??i.count??'—'} ${i.unitLabel||''}`,i.reason])}/>:tab==='orders'?<Table headers={['Дата','Документ','Содержание']} rows={rows.map(i=>[displayDate(i.date),<strong>{i.number||'Пример приказа'}<small>{i.title}</small></strong>,i.summary||i.description])}/>:tab==='finance'?<Finance data={data}/>:<Table headers={['Дисциплина','Контроль','Результат','Период']} rows={rows.map(i=>[<strong>{i.subject||i.title}</strong>,i.assessmentType||i.control||i.type||i.periodTitle||i.period||'Аттестация',<span className="result-tag">{i.resultText??i.result??i.grade??'Нет данных'}</span>,i.semester?String(i.semester):displayDate(i.date)])}/>}</section>}<p className="foot-note">{kind==='finance'?'Поступления не считаются стипендией без подтверждения назначения. Приложение не проводит платежи.':'Отметки и аттестация университета отличаются от оценок за задания Moodle. Официальный допуск здесь не вычисляется.'}</p></div>;
+import { useState } from 'react';
+import { Plus, Search, Trash2, Pencil, ArrowUpRight } from 'lucide-react';
+import { api } from '../api.js';
+import {
+  useResource,
+  Loading,
+  Failure,
+  Metadata,
+  Tabs,
+  Disconnected,
+  DemoNotice,
+  Table,
+  Dialog,
+  EmptyState,
+  displayDate,
+  safeLink,
+} from './common.jsx';
+export function LearningPage({ mode, kind = 'study' }) {
+  const [tab, setTab] = useState(kind === 'finance' ? 'finance' : 'grades'),
+    [demo, setDemo] = useState(false),
+    [revision, setRevision] = useState(0),
+    [semester, setSemester] = useState('all');
+  const effective = demo ? 'demo' : mode;
+  const { data, loading, error } = useResource(`/learning?mode=${effective}&tab=${tab}`, revision);
+  const tabs =
+    kind === 'finance'
+      ? [
+          ['finance', 'Оплата и поступления'],
+          ['orders', 'Приказы'],
+        ]
+      : [
+          ['grades', 'Оценки'],
+          ['attestation', 'Аттестация'],
+          ['absences', 'Пропуски'],
+        ];
+  const items = Array.isArray(data?.items) ? data.items : [];
+  const semesters = [...new Set(items.map((i) => i.semester).filter(Boolean))];
+  const rows = semester === 'all' ? items : items.filter((i) => String(i.semester) === semester);
+  return (
+    <div className="exp-page">
+      <Tabs
+        items={tabs}
+        value={tab}
+        onChange={(v) => {
+          setTab(v);
+          setSemester('all');
+        }}
+      />
+      {effective === 'demo' && <DemoNotice onBack={demo ? () => setDemo(false) : null} />}
+      <Metadata data={data} />
+      {loading ? (
+        <Loading />
+      ) : error ? (
+        <Failure message={error} retry={() => setRevision((x) => x + 1)} />
+      ) : data?.status === 'disconnected' ? (
+        <Disconnected onDemo={() => setDemo(true)} />
+      ) : (
+        <section className="panel exp-data-panel">
+          {semesters.length > 0 && (
+            <div className="exp-toolbar">
+              <h2>{tabs.find((t) => t[0] === tab)?.[1]}</h2>
+              <label className="inline-label">
+                Семестр
+                <select value={semester} onChange={(e) => setSemester(e.target.value)}>
+                  <option value="all">Все</option>
+                  {semesters.map((s) => (
+                    <option key={s} value={s}>
+                      {s}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+          )}
+          {tab === 'absences' ? (
+            <Table
+              headers={['Дата', 'Количество', 'Причина']}
+              rows={rows.map((i) => [
+                displayDate(i.date),
+                `${i.amount ?? i.count ?? '—'} ${i.unitLabel || ''}`,
+                i.reason,
+              ])}
+            />
+          ) : tab === 'orders' ? (
+            <Table
+              headers={['Дата', 'Документ', 'Содержание']}
+              rows={rows.map((i) => [
+                displayDate(i.date),
+                <strong>
+                  {i.number || 'Пример приказа'}
+                  <small>{i.title}</small>
+                </strong>,
+                i.summary || i.description,
+              ])}
+            />
+          ) : tab === 'finance' ? (
+            <Finance data={data} />
+          ) : (
+            <Table
+              headers={['Дисциплина', 'Контроль', 'Результат', 'Период']}
+              rows={rows.map((i) => [
+                <strong>{i.subject || i.title}</strong>,
+                i.assessmentType ||
+                  i.control ||
+                  i.type ||
+                  i.periodTitle ||
+                  i.period ||
+                  'Аттестация',
+                <span className="result-tag">
+                  {i.resultText ?? i.result ?? i.grade ?? 'Нет данных'}
+                </span>,
+                i.semester ? String(i.semester) : displayDate(i.date),
+              ])}
+            />
+          )}
+        </section>
+      )}
+      <p className="foot-note">
+        {kind === 'finance'
+          ? 'Поступления не считаются стипендией без подтверждения назначения. Приложение не проводит платежи.'
+          : 'Отметки и аттестация университета отличаются от оценок за задания Moodle. Официальный допуск здесь не вычисляется.'}
+      </p>
+    </div>
+  );
 }
-function Finance({data}){const [tab,setTab]=useState('charges');const list=data?.[tab]||data?.items?.filter(x=>tab==='charges'?x.kind==='charge':x.kind==='payment')||[];return <><Tabs items={[["charges","Начисления"],["payments","Поступления"]]} value={tab} onChange={setTab}/><Table headers={['Дата','Назначение','Сумма','Статус']} rows={list.map(i=>[displayDate(i.date),i.purpose||i.title,`${i.amount??'—'} ${i.currency||'BYN'}`,i.status||'Демонстрационная запись'])}/></>;}
+function Finance({ data }) {
+  const [tab, setTab] = useState('charges');
+  const list =
+    data?.[tab] ||
+    data?.items?.filter((x) => (tab === 'charges' ? x.kind === 'charge' : x.kind === 'payment')) ||
+    [];
+  return (
+    <>
+      <Tabs
+        items={[
+          ['charges', 'Начисления'],
+          ['payments', 'Поступления'],
+        ]}
+        value={tab}
+        onChange={setTab}
+      />
+      <Table
+        headers={['Дата', 'Назначение', 'Сумма', 'Статус']}
+        rows={list.map((i) => [
+          displayDate(i.date),
+          i.purpose || i.title,
+          `${i.amount ?? '—'} ${i.currency || 'BYN'}`,
+          i.status || 'Демонстрационная запись',
+        ])}
+      />
+    </>
+  );
+}
 
-export function MaterialsPage({mode,notify}){const [tab,setTab]=useState('mine'),[demo,setDemo]=useState(false),[revision,setRevision]=useState(0),[search,setSearch]=useState(''),[editor,setEditor]=useState(null),[error,setError]=useState('');const scope=mode==='demo'?'demo':'live';const resource=useResource(tab==='mine'?`/materials?scope=${scope}`:`/learning?tab=materials&mode=${demo?'demo':mode}`,revision);const items=(resource.data?.items||[]).filter(i=>`${i.title} ${i.subject} ${i.notes||''}`.toLowerCase().includes(search.toLowerCase()));async function save(body,id){await api(`/materials${id?'/'+id:''}?scope=${scope}`,{method:id?'PATCH':'POST',body});setRevision(x=>x+1);notify('Материал сохранён');}async function remove(id){if(!confirm('Удалить эту ссылку или заметку?'))return;try{await api(`/materials/${id}?scope=${scope}`,{method:'DELETE'});setRevision(x=>x+1);notify('Материал удалён');}catch(e){setError(e.message);}}
- return <div className="exp-page"><Tabs items={[["mine","Мои материалы"],["portal","Образовательный портал"]]} value={tab} onChange={setTab}/>{(mode==='demo'||tab==='portal'&&demo)&&<DemoNotice onBack={demo?()=>setDemo(false):null}/>}<Metadata data={resource.data} label="Личные ссылки и заметки"/>{error&&<Failure message={error}/>} {tab==='mine'&&<div className="exp-toolbar"><label className="search"><Search size={17}/><input aria-label="Поиск материалов" placeholder="Найти по названию или предмету" value={search} onChange={e=>setSearch(e.target.value)}/></label><button className="primary" onClick={()=>setEditor({})}><Plus size={17}/>Добавить материал</button></div>}{resource.loading?<Loading/>:resource.error?<Failure message={resource.error} retry={()=>setRevision(x=>x+1)}/>:resource.data?.status==='disconnected'?<Disconnected description="Курсы, файлы и задания преподавателей доступны после отдельного подключения образовательного портала. Свои ссылки и заметки можно хранить уже сейчас." onDemo={()=>setDemo(true)}/>:tab==='mine'?<section className="panel">{items.length?items.map(i=><div className="material-row" key={i.id}><div className="material-icon">{i.url?'↗':'≡'}</div><div><h3>{i.title}</h3><p className="muted">{i.subject||'Без дисциплины'}</p>{i.notes&&<p className="material-notes">{i.notes}</p>}{safeLink(i.url)&&<a href={safeLink(i.url)} rel="noreferrer" target="_blank" className="text-button">Открыть ссылку <ArrowUpRight size={14}/></a>}</div><div className="material-actions"><button className="icon-button" aria-label={`Редактировать материал: ${i.title}`} onClick={()=>setEditor(i)}><Pencil size={16}/></button><button className="icon-button" aria-label={`Удалить материал: ${i.title}`} onClick={()=>remove(i.id)}><Trash2 size={16}/></button></div></div>):<EmptyState title="Твои учебные материалы"><span>Сохраняй ссылки и заметки по дисциплинам. Загрузка файлов пока не подключена.</span></EmptyState>}</section>:<PortalMaterials data={resource.data}/>}<p className="foot-note">Личные материалы хранятся в Kupala Hub. Они не отправляются преподавателям и на портал.</p>{editor&&<MaterialEditor item={editor} save={save} onClose={()=>setEditor(null)}/>}</div>;
+export function MaterialsPage({ mode, notify }) {
+  const [tab, setTab] = useState('mine'),
+    [demo, setDemo] = useState(false),
+    [revision, setRevision] = useState(0),
+    [search, setSearch] = useState(''),
+    [editor, setEditor] = useState(null),
+    [error, setError] = useState('');
+  const scope = mode === 'demo' ? 'demo' : 'live';
+  const resource = useResource(
+    tab === 'mine'
+      ? `/materials?scope=${scope}`
+      : `/learning?tab=materials&mode=${demo ? 'demo' : mode}`,
+    revision,
+  );
+  const items = (resource.data?.items || []).filter((i) =>
+    `${i.title} ${i.subject} ${i.notes || ''}`.toLowerCase().includes(search.toLowerCase()),
+  );
+  async function save(body, id) {
+    await api(`/materials${id ? '/' + id : ''}?scope=${scope}`, {
+      method: id ? 'PATCH' : 'POST',
+      body,
+    });
+    setRevision((x) => x + 1);
+    notify('Материал сохранён');
+  }
+  async function remove(id) {
+    if (!confirm('Удалить эту ссылку или заметку?')) return;
+    try {
+      await api(`/materials/${id}?scope=${scope}`, { method: 'DELETE' });
+      setRevision((x) => x + 1);
+      notify('Материал удалён');
+    } catch (e) {
+      setError(e.message);
+    }
+  }
+  return (
+    <div className="exp-page">
+      <Tabs
+        items={[
+          ['mine', 'Мои материалы'],
+          ['portal', 'Образовательный портал'],
+        ]}
+        value={tab}
+        onChange={setTab}
+      />
+      {(mode === 'demo' || (tab === 'portal' && demo)) && (
+        <DemoNotice onBack={demo ? () => setDemo(false) : null} />
+      )}
+      <Metadata data={resource.data} label="Личные ссылки и заметки" />
+      {error && <Failure message={error} />}{' '}
+      {tab === 'mine' && (
+        <div className="exp-toolbar">
+          <label className="search">
+            <Search size={17} />
+            <input
+              aria-label="Поиск материалов"
+              placeholder="Найти по названию или предмету"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </label>
+          <button className="primary" onClick={() => setEditor({})}>
+            <Plus size={17} />
+            Добавить материал
+          </button>
+        </div>
+      )}
+      {resource.loading ? (
+        <Loading />
+      ) : resource.error ? (
+        <Failure message={resource.error} retry={() => setRevision((x) => x + 1)} />
+      ) : resource.data?.status === 'disconnected' ? (
+        <Disconnected
+          description="Курсы, файлы и задания преподавателей доступны после отдельного подключения образовательного портала. Свои ссылки и заметки можно хранить уже сейчас."
+          onDemo={() => setDemo(true)}
+        />
+      ) : tab === 'mine' ? (
+        <section className="panel">
+          {items.length ? (
+            items.map((i) => (
+              <div className="material-row" key={i.id}>
+                <div className="material-icon">{i.url ? '↗' : '≡'}</div>
+                <div>
+                  <h3>{i.title}</h3>
+                  <p className="muted">{i.subject || 'Без дисциплины'}</p>
+                  {i.notes && <p className="material-notes">{i.notes}</p>}
+                  {safeLink(i.url) && (
+                    <a
+                      href={safeLink(i.url)}
+                      rel="noreferrer"
+                      target="_blank"
+                      className="text-button"
+                    >
+                      Открыть ссылку <ArrowUpRight size={14} />
+                    </a>
+                  )}
+                </div>
+                <div className="material-actions">
+                  <button
+                    className="icon-button"
+                    aria-label={`Редактировать материал: ${i.title}`}
+                    onClick={() => setEditor(i)}
+                  >
+                    <Pencil size={16} />
+                  </button>
+                  <button
+                    className="icon-button"
+                    aria-label={`Удалить материал: ${i.title}`}
+                    onClick={() => remove(i.id)}
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                </div>
+              </div>
+            ))
+          ) : (
+            <EmptyState title="Твои учебные материалы">
+              <span>
+                Сохраняй ссылки и заметки по дисциплинам. Загрузка файлов пока не подключена.
+              </span>
+            </EmptyState>
+          )}
+        </section>
+      ) : (
+        <PortalMaterials data={resource.data} />
+      )}
+      <p className="foot-note">
+        Личные материалы хранятся в Kupala Hub. Они не отправляются преподавателям и на портал.
+      </p>
+      {editor && <MaterialEditor item={editor} save={save} onClose={() => setEditor(null)} />}
+    </div>
+  );
 }
-function PortalMaterials({data}){const items=data.items||data.courses||[];return <div className="portal-courses">{items.map((course,index)=><section className="panel" key={course.id||index}><div className="section-head"><div><span className="eyebrow">Пример курса</span><h2>{course.title||course.name||course.courseTitle}</h2></div><span className="source demo">Демо</span></div>{(course.sections||[]).map((s,i)=><div className="course-section" key={i}><h3>{typeof s==='string'?s:s.title}</h3>{(s.resources||s.items||[]).map((r,j)=><div key={j} className="course-resource"><span>{r.title||r.name}</span><small>{r.type||'Материал'}</small></div>)}</div>)}{(course.assignments||[]).map((a,i)=><div className="course-resource" key={i}><strong>{a.title}</strong><span>Сдать до {displayDate(a.dueDate)}</span><small>{a.submissionStatus||a.status||'Пример задания'}</small></div>)}{course.description&&<p className="muted">{course.description}</p>}</section>)}{!items.length&&<EmptyState title="В примере нет курсов"/>}</div>;}
-function MaterialEditor({item,save,onClose}){const [busy,setBusy]=useState(false),[error,setError]=useState('');async function submit(e){e.preventDefault();setBusy(true);setError('');const f=new FormData(e.currentTarget);try{await save({title:f.get('title'),subject:f.get('subject'),url:f.get('url'),notes:f.get('notes'),kind:f.get('url').trim()?'link':'note'},item.id);onClose();}catch(e){setError(e.message);}finally{setBusy(false);}}return <Dialog title={item.id?'Редактировать материал':'Новый материал'} onClose={onClose}>{error&&<Failure message={error}/>}<form onSubmit={submit}><fieldset disabled={busy}><label>Название<input autoFocus required name="title" maxLength={200} defaultValue={item.title||''}/></label><label>Дисциплина<input name="subject" maxLength={200} defaultValue={item.subject||''}/></label><label>HTTPS-ссылка<input type="url" name="url" defaultValue={item.url||''} placeholder="https://…"/></label><label>Заметка<textarea name="notes" rows={4} maxLength={4000} defaultValue={item.notes||''}/></label><div className="form-actions"><button className="secondary" type="button" onClick={onClose}>Отмена</button><button className="primary">{busy?'Сохраняем…':'Сохранить материал'}</button></div></fieldset></form></Dialog>;}
+function PortalMaterials({ data }) {
+  const items = data.items || data.courses || [];
+  return (
+    <div className="portal-courses">
+      {items.map((course, index) => (
+        <section className="panel" key={course.id || index}>
+          <div className="section-head">
+            <div>
+              <span className="eyebrow">Пример курса</span>
+              <h2>{course.title || course.name || course.courseTitle}</h2>
+            </div>
+            <span className="source demo">Демо</span>
+          </div>
+          {(course.sections || []).map((s, i) => (
+            <div className="course-section" key={i}>
+              <h3>{typeof s === 'string' ? s : s.title}</h3>
+              {(s.resources || s.items || []).map((r, j) => (
+                <div key={j} className="course-resource">
+                  <span>{r.title || r.name}</span>
+                  <small>{r.type || 'Материал'}</small>
+                </div>
+              ))}
+            </div>
+          ))}
+          {(course.assignments || []).map((a, i) => (
+            <div className="course-resource" key={i}>
+              <strong>{a.title}</strong>
+              <span>Сдать до {displayDate(a.dueDate)}</span>
+              <small>{a.submissionStatus || a.status || 'Пример задания'}</small>
+            </div>
+          ))}
+          {course.description && <p className="muted">{course.description}</p>}
+        </section>
+      ))}
+      {!items.length && <EmptyState title="В примере нет курсов" />}
+    </div>
+  );
+}
+function MaterialEditor({ item, save, onClose }) {
+  const [busy, setBusy] = useState(false),
+    [error, setError] = useState('');
+  async function submit(e) {
+    e.preventDefault();
+    setBusy(true);
+    setError('');
+    const f = new FormData(e.currentTarget);
+    try {
+      await save(
+        {
+          title: f.get('title'),
+          subject: f.get('subject'),
+          url: f.get('url'),
+          notes: f.get('notes'),
+          kind: f.get('url').trim() ? 'link' : 'note',
+        },
+        item.id,
+      );
+      onClose();
+    } catch (e) {
+      setError(e.message);
+    } finally {
+      setBusy(false);
+    }
+  }
+  return (
+    <Dialog title={item.id ? 'Редактировать материал' : 'Новый материал'} onClose={onClose}>
+      {error && <Failure message={error} />}
+      <form onSubmit={submit}>
+        <fieldset disabled={busy}>
+          <label>
+            Название
+            <input
+              autoFocus
+              required
+              name="title"
+              maxLength={200}
+              defaultValue={item.title || ''}
+            />
+          </label>
+          <label>
+            Дисциплина
+            <input name="subject" maxLength={200} defaultValue={item.subject || ''} />
+          </label>
+          <label>
+            HTTPS-ссылка
+            <input type="url" name="url" defaultValue={item.url || ''} placeholder="https://…" />
+          </label>
+          <label>
+            Заметка
+            <textarea name="notes" rows={4} maxLength={4000} defaultValue={item.notes || ''} />
+          </label>
+          <div className="form-actions">
+            <button className="secondary" type="button" onClick={onClose}>
+              Отмена
+            </button>
+            <button className="primary">{busy ? 'Сохраняем…' : 'Сохранить материал'}</button>
+          </div>
+        </fieldset>
+      </form>
+    </Dialog>
+  );
+}

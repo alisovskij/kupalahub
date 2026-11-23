@@ -1,7 +1,343 @@
-import React,{useState} from 'react';
-import {Bell,CalendarDays,CheckSquare,GraduationCap,Settings,User} from 'lucide-react';
-import {api} from '../api.js';
-import {todayInMinsk,minskMinutes,minutes} from '../../../shared/calendar.js';
-import {useResource,Loading,Failure,Metadata,Tabs,EmptyState,Disconnected,displayDate} from './common.jsx';
-export function ProfilePage({session,settings,onProfile,onGroup,notify}){const [tab,setTab]=useState('profile'),[revision,setRevision]=useState(0),[busy,setBusy]=useState(false),[error,setError]=useState('');const profile=useResource('/profile',revision),preferences=useResource('/preferences',revision);async function submit(e){e.preventDefault();setError('');setBusy(true);const f=new FormData(e.currentTarget);try{if(tab==='profile'){const value=await api('/profile',{method:'PUT',body:{name:f.get('name'),contact:f.get('contact'),bio:f.get('bio')}});onProfile(value);}else{await api('/preferences',{method:'PUT',body:{lessonReminders:f.get('lessonReminders')==='on',taskReminders:f.get('taskReminders')==='on',reminderMinutes:Number(f.get('reminderMinutes')),quietHoursStart:f.get('quietHoursStart'),quietHoursEnd:f.get('quietHoursEnd')}});}setRevision(x=>x+1);notify('Изменения сохранены');}catch(e){setError(e.message);}finally{setBusy(false);}}const resource=tab==='profile'?profile:preferences;return <div className="exp-page"><Tabs items={[["profile","Мой профиль"],["preferences","Настройки"],["university","Данные университета"]]} value={tab} onChange={setTab}/>{error&&<Failure message={error}/>} {tab==='university'?<section className="panel disconnected"><div className="disconnected-icon"><GraduationCap size={28}/></div><h2>Университетский профиль не подключён</h2><p>Имя и контакты Kupala Hub вводятся тобой. Выбор учебной группы не подтверждает принадлежность к ней. Фото, личные сведения и официальные группы из MyGRSU здесь пока не загружаются.</p><a className="secondary" href="https://edu.grsu.by/" target="_blank" rel="noreferrer">Открыть образовательный портал</a></section>:resource.loading?<Loading/>:resource.error?<Failure message={resource.error} retry={()=>setRevision(x=>x+1)}/>:<div className="profile-layout"><section className="panel profile-editor"><div className="section-head"><h2>{tab==='profile'?'Как тебя называть':'Настройки напоминаний'}</h2><span className="source">Kupala Hub</span></div><form onSubmit={submit} key={tab+revision}><fieldset disabled={busy}>{tab==='profile'?<><label>Имя<input required name="name" maxLength={80} defaultValue={profile.data.name}/></label><label>Email аккаунта<input readOnly value={session.email||'Гостевой профиль — email не указан'} aria-label="Email аккаунта"/></label><label>Контакт для себя<input name="contact" maxLength={200} defaultValue={profile.data.contact} placeholder="Например, Telegram"/></label><label>О себе<textarea name="bio" rows={4} maxLength={1000} defaultValue={profile.data.bio}/></label><p className="form-note">Контакт и заметка остаются в твоём профиле. Участники сообщества видят только имя.</p></>:<><div className="preference-check"><label><input type="checkbox" name="lessonReminders" defaultChecked={preferences.data.lessonReminders}/>Показывать ближайшие пары в уведомлениях</label><label><input type="checkbox" name="taskReminders" defaultChecked={preferences.data.taskReminders}/>Показывать задачи на сегодня в уведомлениях</label></div><label>За сколько минут до пары<select name="reminderMinutes" defaultValue={preferences.data.reminderMinutes}>{[5,10,15,30,60,120].map(n=><option key={n} value={n}>{n} минут</option>)}</select></label><div className="form-grid"><label>Тихие часы: начало<input name="quietHoursStart" type="time" required defaultValue={preferences.data.quietHoursStart}/></label><label>Окончание<input name="quietHoursEnd" type="time" required defaultValue={preferences.data.quietHoursEnd}/></label></div><div className="notice"><Bell size={18}/><p>Настройки применяются к списку уведомлений внутри приложения. Фоновые push и почтовая доставка пока не подключены.</p></div></>}<div className="form-actions"><button className="primary">{busy?'Сохраняем…':'Сохранить изменения'}</button></div></fieldset></form></section><aside className="panel profile-context"><span className="eyebrow">Твоя учёба</span><h2>{settings.groupTitle||'Группа не выбрана'}</h2><p className="muted">{settings.mode==='demo'?'Демонстрационный режим':'Расписание из публичного API'}</p><p className="muted">Подгруппы: {settings.subgroups.length?`выбрано ${settings.subgroups.length}`:'показываются все'}</p><button className="secondary" onClick={onGroup}>Изменить учебную группу</button><div className="context-divider"/><User size={21}/><p>Это профиль приложения, отдельный от личного кабинета ГрГУ.</p></aside></div>}</div>;}
-export function NotificationsPage({tasks,schedule,settings,navigate}){const [revision,setRevision]=useState(0);const preferences=useResource('/preferences',revision);const now=new Date(),today=todayInMinsk(now),current=minskMinutes(now);const [show,setShow]=useState('all');const prefs=preferences.data;const start=minutes(prefs?.quietHoursStart||'22:00'),end=minutes(prefs?.quietHoursEnd||'08:00');const quiet=start===end?false:start<end?current>=start&&current<end:current>=start||current<end;const changes=schedule?.changes||[];const due=tasks.filter(t=>!t.done&&t.dueDate&&t.dueDate<=today);const lessons=(schedule?.days||[]).filter(d=>d.date===today).flatMap(d=>d.lessons).filter(l=>!l.subgroupId||l.subgroupId==='0'||!settings.subgroups.length||settings.subgroups.includes(l.subgroupId)).filter(l=>minutes(l.start)>=current&&minutes(l.start)-current<=Number(prefs?.reminderMinutes||15));const reminders=quiet?[]:[...(prefs?.taskReminders?due.map(t=>({id:t.id,title:t.title,text:`Срок: ${displayDate(t.dueDate)}`,target:'tasks',Icon:CheckSquare})):[]),...(prefs?.lessonReminders?lessons.map(l=>({id:l.key,title:l.title,text:`Начало в ${l.start} · ${l.room?`ауд. ${l.room}`:'аудитория не указана'}`,target:'today',Icon:CalendarDays})):[])];if(preferences.loading)return <Loading/>;if(preferences.error)return <Failure message={preferences.error} retry={()=>setRevision(x=>x+1)}/>;return <div className="exp-page"><div className="coverage-note"><Bell size={19}/><p><strong>Уведомления внутри приложения</strong>Проверяем ближайшие пары и сроки по загруженным данным. Новые изменения доступны после сравнения снимков; доставка при закрытом приложении пока не подключена.</p></div><Tabs items={[["all","Все"],["changes",`Расписание · ${changes.length}`],["reminders",`Напоминания · ${reminders.length}`]]} value={show} onChange={setShow}/>{schedule?.stale&&<Failure message="Расписание сохранено ранее и может быть неактуальным."/>}<section className="panel">{show!=='changes'&&reminders.map(n=><button className="notification-row" key={n.id} onClick={()=>navigate(n.target)}><span className="notification-icon"><n.Icon size={19}/></span><span><strong>{n.title}</strong><small>{n.text}</small></span></button>)}{show!=='reminders'&&changes.map((c,i)=><button key={i} className="notification-row" onClick={()=>navigate('schedule')}><span className="notification-icon amber"><CalendarDays size={19}/></span><span><strong>{c.title}</strong><small>{displayDate(c.date)} · {c.start} · {c.kind==='added'?'Добавлено занятие':c.kind==='removed'?'Нет в новом снимке':`Место: ${c.before?.room||'не указано'} → ${c.after?.room||'не указано'}`}</small></span></button>)}{((show==='changes'&&!changes.length)||(show==='reminders'&&!reminders.length)||(show==='all'&&!changes.length&&!reminders.length))&&<EmptyState title="Новых уведомлений нет">{quiet?'Сейчас действуют тихие часы. Изменения расписания всё равно доступны в соответствующей вкладке.':'Напоминания о парах и задачах можно включить в настройках.'}</EmptyState>}</section><button className="text-button" onClick={()=>navigate('profile')}><Settings size={15}/>Настроить напоминания</button></div>;}
+import { useState } from 'react';
+import { Bell, CalendarDays, CheckSquare, GraduationCap, Settings, User } from 'lucide-react';
+import { api } from '../api.js';
+import { todayInMinsk, minskMinutes, minutes } from '../../../shared/calendar.js';
+import { useResource, Loading, Failure, Tabs, EmptyState, displayDate } from './common.jsx';
+export function ProfilePage({ session, settings, onProfile, onGroup, notify }) {
+  const [tab, setTab] = useState('profile'),
+    [revision, setRevision] = useState(0),
+    [busy, setBusy] = useState(false),
+    [error, setError] = useState('');
+  const profile = useResource('/profile', revision),
+    preferences = useResource('/preferences', revision);
+  async function submit(e) {
+    e.preventDefault();
+    setError('');
+    setBusy(true);
+    const f = new FormData(e.currentTarget);
+    try {
+      if (tab === 'profile') {
+        const value = await api('/profile', {
+          method: 'PUT',
+          body: { name: f.get('name'), contact: f.get('contact'), bio: f.get('bio') },
+        });
+        onProfile(value);
+      } else {
+        await api('/preferences', {
+          method: 'PUT',
+          body: {
+            lessonReminders: f.get('lessonReminders') === 'on',
+            taskReminders: f.get('taskReminders') === 'on',
+            reminderMinutes: Number(f.get('reminderMinutes')),
+            quietHoursStart: f.get('quietHoursStart'),
+            quietHoursEnd: f.get('quietHoursEnd'),
+          },
+        });
+      }
+      setRevision((x) => x + 1);
+      notify('Изменения сохранены');
+    } catch (e) {
+      setError(e.message);
+    } finally {
+      setBusy(false);
+    }
+  }
+  const resource = tab === 'profile' ? profile : preferences;
+  return (
+    <div className="exp-page">
+      <Tabs
+        items={[
+          ['profile', 'Мой профиль'],
+          ['preferences', 'Настройки'],
+          ['university', 'Данные университета'],
+        ]}
+        value={tab}
+        onChange={setTab}
+      />
+      {error && <Failure message={error} />}{' '}
+      {tab === 'university' ? (
+        <section className="panel disconnected">
+          <div className="disconnected-icon">
+            <GraduationCap size={28} />
+          </div>
+          <h2>Университетский профиль не подключён</h2>
+          <p>
+            Имя и контакты Kupala Hub вводятся тобой. Выбор учебной группы не подтверждает
+            принадлежность к ней. Фото, личные сведения и официальные группы из MyGRSU здесь пока не
+            загружаются.
+          </p>
+          <a className="secondary" href="https://edu.grsu.by/" target="_blank" rel="noreferrer">
+            Открыть образовательный портал
+          </a>
+        </section>
+      ) : resource.loading ? (
+        <Loading />
+      ) : resource.error ? (
+        <Failure message={resource.error} retry={() => setRevision((x) => x + 1)} />
+      ) : (
+        <div className="profile-layout">
+          <section className="panel profile-editor">
+            <div className="section-head">
+              <h2>{tab === 'profile' ? 'Как тебя называть' : 'Настройки напоминаний'}</h2>
+              <span className="source">Kupala Hub</span>
+            </div>
+            <form onSubmit={submit} key={tab + revision}>
+              <fieldset disabled={busy}>
+                {tab === 'profile' ? (
+                  <>
+                    <label>
+                      Имя
+                      <input required name="name" maxLength={80} defaultValue={profile.data.name} />
+                    </label>
+                    <label>
+                      Email аккаунта
+                      <input
+                        readOnly
+                        value={session.email || 'Гостевой профиль — email не указан'}
+                        aria-label="Email аккаунта"
+                      />
+                    </label>
+                    <label>
+                      Контакт для себя
+                      <input
+                        name="contact"
+                        maxLength={200}
+                        defaultValue={profile.data.contact}
+                        placeholder="Например, Telegram"
+                      />
+                    </label>
+                    <label>
+                      О себе
+                      <textarea
+                        name="bio"
+                        rows={4}
+                        maxLength={1000}
+                        defaultValue={profile.data.bio}
+                      />
+                    </label>
+                    <p className="form-note">
+                      Контакт и заметка остаются в твоём профиле. Участники сообщества видят только
+                      имя.
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <div className="preference-check">
+                      <label>
+                        <input
+                          type="checkbox"
+                          name="lessonReminders"
+                          defaultChecked={preferences.data.lessonReminders}
+                        />
+                        Показывать ближайшие пары в уведомлениях
+                      </label>
+                      <label>
+                        <input
+                          type="checkbox"
+                          name="taskReminders"
+                          defaultChecked={preferences.data.taskReminders}
+                        />
+                        Показывать задачи на сегодня в уведомлениях
+                      </label>
+                    </div>
+                    <label>
+                      За сколько минут до пары
+                      <select
+                        name="reminderMinutes"
+                        defaultValue={preferences.data.reminderMinutes}
+                      >
+                        {[5, 10, 15, 30, 60, 120].map((n) => (
+                          <option key={n} value={n}>
+                            {n} минут
+                          </option>
+                        ))}
+                      </select>
+                    </label>
+                    <div className="form-grid">
+                      <label>
+                        Тихие часы: начало
+                        <input
+                          name="quietHoursStart"
+                          type="time"
+                          required
+                          defaultValue={preferences.data.quietHoursStart}
+                        />
+                      </label>
+                      <label>
+                        Окончание
+                        <input
+                          name="quietHoursEnd"
+                          type="time"
+                          required
+                          defaultValue={preferences.data.quietHoursEnd}
+                        />
+                      </label>
+                    </div>
+                    <div className="notice">
+                      <Bell size={18} />
+                      <p>
+                        Настройки применяются к списку уведомлений внутри приложения. Фоновые push и
+                        почтовая доставка пока не подключены.
+                      </p>
+                    </div>
+                  </>
+                )}
+                <div className="form-actions">
+                  <button className="primary">{busy ? 'Сохраняем…' : 'Сохранить изменения'}</button>
+                </div>
+              </fieldset>
+            </form>
+          </section>
+          <aside className="panel profile-context">
+            <span className="eyebrow">Твоя учёба</span>
+            <h2>{settings.groupTitle || 'Группа не выбрана'}</h2>
+            <p className="muted">
+              {settings.mode === 'demo' ? 'Демонстрационный режим' : 'Расписание из публичного API'}
+            </p>
+            <p className="muted">
+              Подгруппы:{' '}
+              {settings.subgroups.length
+                ? `выбрано ${settings.subgroups.length}`
+                : 'показываются все'}
+            </p>
+            <button className="secondary" onClick={onGroup}>
+              Изменить учебную группу
+            </button>
+            <div className="context-divider" />
+            <User size={21} />
+            <p>Это профиль приложения, отдельный от личного кабинета ГрГУ.</p>
+          </aside>
+        </div>
+      )}
+    </div>
+  );
+}
+export function NotificationsPage({ tasks, schedule, settings, navigate }) {
+  const [revision, setRevision] = useState(0);
+  const preferences = useResource('/preferences', revision);
+  const now = new Date(),
+    today = todayInMinsk(now),
+    current = minskMinutes(now);
+  const [show, setShow] = useState('all');
+  const prefs = preferences.data;
+  const start = minutes(prefs?.quietHoursStart || '22:00'),
+    end = minutes(prefs?.quietHoursEnd || '08:00');
+  const quiet =
+    start === end
+      ? false
+      : start < end
+        ? current >= start && current < end
+        : current >= start || current < end;
+  const changes = schedule?.changes || [];
+  const due = tasks.filter((t) => !t.done && t.dueDate && t.dueDate <= today);
+  const lessons = (schedule?.days || [])
+    .filter((d) => d.date === today)
+    .flatMap((d) => d.lessons)
+    .filter(
+      (l) =>
+        !l.subgroupId ||
+        l.subgroupId === '0' ||
+        !settings.subgroups.length ||
+        settings.subgroups.includes(l.subgroupId),
+    )
+    .filter(
+      (l) =>
+        minutes(l.start) >= current &&
+        minutes(l.start) - current <= Number(prefs?.reminderMinutes || 15),
+    );
+  const reminders = quiet
+    ? []
+    : [
+        ...(prefs?.taskReminders
+          ? due.map((t) => ({
+              id: t.id,
+              title: t.title,
+              text: `Срок: ${displayDate(t.dueDate)}`,
+              target: 'tasks',
+              Icon: CheckSquare,
+            }))
+          : []),
+        ...(prefs?.lessonReminders
+          ? lessons.map((l) => ({
+              id: l.key,
+              title: l.title,
+              text: `Начало в ${l.start} · ${l.room ? `ауд. ${l.room}` : 'аудитория не указана'}`,
+              target: 'today',
+              Icon: CalendarDays,
+            }))
+          : []),
+      ];
+  if (preferences.loading) return <Loading />;
+  if (preferences.error)
+    return <Failure message={preferences.error} retry={() => setRevision((x) => x + 1)} />;
+  return (
+    <div className="exp-page">
+      <div className="coverage-note">
+        <Bell size={19} />
+        <p>
+          <strong>Уведомления внутри приложения</strong>Проверяем ближайшие пары и сроки по
+          загруженным данным. Новые изменения доступны после сравнения снимков; доставка при
+          закрытом приложении пока не подключена.
+        </p>
+      </div>
+      <Tabs
+        items={[
+          ['all', 'Все'],
+          ['changes', `Расписание · ${changes.length}`],
+          ['reminders', `Напоминания · ${reminders.length}`],
+        ]}
+        value={show}
+        onChange={setShow}
+      />
+      {schedule?.stale && (
+        <Failure message="Расписание сохранено ранее и может быть неактуальным." />
+      )}
+      <section className="panel">
+        {show !== 'changes' &&
+          reminders.map((n) => (
+            <button className="notification-row" key={n.id} onClick={() => navigate(n.target)}>
+              <span className="notification-icon">
+                <n.Icon size={19} />
+              </span>
+              <span>
+                <strong>{n.title}</strong>
+                <small>{n.text}</small>
+              </span>
+            </button>
+          ))}
+        {show !== 'reminders' &&
+          changes.map((c, i) => (
+            <button key={i} className="notification-row" onClick={() => navigate('schedule')}>
+              <span className="notification-icon amber">
+                <CalendarDays size={19} />
+              </span>
+              <span>
+                <strong>{c.title}</strong>
+                <small>
+                  {displayDate(c.date)} · {c.start} ·{' '}
+                  {c.kind === 'added'
+                    ? 'Добавлено занятие'
+                    : c.kind === 'removed'
+                      ? 'Нет в новом снимке'
+                      : `Место: ${c.before?.room || 'не указано'} → ${c.after?.room || 'не указано'}`}
+                </small>
+              </span>
+            </button>
+          ))}
+        {((show === 'changes' && !changes.length) ||
+          (show === 'reminders' && !reminders.length) ||
+          (show === 'all' && !changes.length && !reminders.length)) && (
+          <EmptyState title="Новых уведомлений нет">
+            {quiet
+              ? 'Сейчас действуют тихие часы. Изменения расписания всё равно доступны в соответствующей вкладке.'
+              : 'Напоминания о парах и задачах можно включить в настройках.'}
+          </EmptyState>
+        )}
+      </section>
+      <button className="text-button" onClick={() => navigate('profile')}>
+        <Settings size={15} />
+        Настроить напоминания
+      </button>
+    </div>
+  );
+}

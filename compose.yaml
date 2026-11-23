@@ -2,7 +2,7 @@ services:
   backend:
     build: .
     ports:
-      - "127.0.0.1:3001:3001"
+      - '127.0.0.1:3001:3001'
     environment:
       AI_SERVICE_URL: http://ai:8001
       AGENT_SERVICE_TOKEN: ${AGENT_SERVICE_TOKEN:?Run npm run setup:agent first}

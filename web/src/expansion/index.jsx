@@ -1,11 +1,157 @@
-import React from 'react';
-import {BookOpen,CalendarDays,CheckSquare,GraduationCap,LayoutDashboard,MapPin,Users,Wallet,UserRound,Bell,MessageCircle} from 'lucide-react';
-import {LearningPage,MaterialsPage} from './Learning.jsx';
-import {TeachersPage,ExamsPage,CampusPage} from './University.jsx';
-import {CommunityPage} from './Community.jsx';
-import {ProfilePage,NotificationsPage} from './Personal.jsx';
+import {
+  BookOpen,
+  CalendarDays,
+  CheckSquare,
+  GraduationCap,
+  LayoutDashboard,
+  MapPin,
+  Users,
+  Wallet,
+  UserRound,
+  Bell,
+  MessageCircle,
+} from 'lucide-react';
+import { LearningPage, MaterialsPage } from './Learning.jsx';
+import { TeachersPage, ExamsPage, CampusPage } from './University.jsx';
+import { CommunityPage } from './Community.jsx';
+import { ProfilePage, NotificationsPage } from './Personal.jsx';
 import AssistantPage from '../assistant/AssistantPage.jsx';
-export const pageInfo={today:['Сегодня',''],schedule:['Расписание',''],tasks:['Задачи',''],assistant:['Ассистент','Планируй день, разбирайся со сроками и превращай большие дела в понятные шаги.'],study:['Успеваемость','Результаты по дисциплинам, аттестация и посещаемость.'],materials:['Материалы','Личные ссылки и заметки — рядом с учебными курсами.'],exams:['Сессия','Экзамены, зачёты и консультации из опубликованного расписания.'],teachers:['Преподаватели','Найди контакты преподавателя и посмотри его учебную неделю.'],campus:['Кампус','Корпуса и занятия в доступных расписаниях.'],community:['Моя группа','Общие дела, объявления и решения — в пространстве Kupala Hub.'],finance:['Платежи и документы','Информация личного кабинета с понятным статусом источника.'],profile:['Профиль и настройки','Твои данные и предпочтения в Kupala Hub.'],notifications:['Уведомления','Изменения расписания и ближайшие учебные сроки.']};
-const groups=[['Мой день',[['today','Сегодня',LayoutDashboard],['schedule','Расписание',CalendarDays],['tasks','Задачи',CheckSquare],['assistant','Ассистент',MessageCircle]]],['Учёба',[['study','Успеваемость',GraduationCap],['materials','Материалы',BookOpen],['exams','Сессия',CalendarDays]]],['Университет',[['teachers','Преподаватели',UserRound],['campus','Кампус',MapPin],['community','Моя группа',Users]]],['Личное',[['finance','Платежи и документы',Wallet],['profile','Профиль и настройки',UserRound],['notifications','Уведомления',Bell]]]];
-export function ExpandedNav({page,navigate,taskCount}){return <nav className="main-nav expanded-nav" aria-label="Основные разделы">{groups.map(([name,items])=><div className="nav-section" key={name}><span className="nav-section-title">{name}</span>{items.map(([id,label,Icon])=><a key={id} href={'#'+id} aria-current={page===id?'page':undefined} className={page===id?'active':''} onClick={()=>navigate(id)}><Icon size={18}/><span>{label}</span>{id==='tasks'&&taskCount>0&&<span className="nav-count">{taskCount}</span>}</a>)}</div>)}</nav>;}
-export function ExpandedPage({page,settings,session,notify,onLesson,onGroup,onProfile,tasks,schedule,navigate,onAddTask,onReloadTasks}){switch(page){case 'assistant':return <AssistantPage scope={settings.mode==='demo'?'demo':'live'} settings={settings} tasks={tasks} schedule={schedule} onReloadTasks={onReloadTasks}/>;case 'study':return <LearningPage key="study" mode={settings.mode}/>;case 'finance':return <LearningPage key="finance" kind="finance" mode={settings.mode}/>;case 'materials':return <MaterialsPage mode={settings.mode} notify={notify}/>;case 'teachers':return <TeachersPage mode={settings.mode} onLesson={onLesson} notify={notify}/>;case 'exams':return <ExamsPage settings={settings} onLesson={onLesson}/>;case 'campus':return <CampusPage settings={settings}/>;case 'community':return <CommunityPage mode={settings.mode} notify={notify} onAddTask={onAddTask}/>;case 'profile':return <ProfilePage session={session} settings={settings} onProfile={onProfile} onGroup={onGroup} notify={notify}/>;case 'notifications':return <NotificationsPage tasks={tasks} schedule={schedule} settings={settings} navigate={navigate}/>;default:return null;}}
+export const pageInfo = {
+  today: ['Сегодня', ''],
+  schedule: ['Расписание', ''],
+  tasks: ['Задачи', ''],
+  assistant: [
+    'Ассистент',
+    'Планируй день, разбирайся со сроками и превращай большие дела в понятные шаги.',
+  ],
+  study: ['Успеваемость', 'Результаты по дисциплинам, аттестация и посещаемость.'],
+  materials: ['Материалы', 'Личные ссылки и заметки — рядом с учебными курсами.'],
+  exams: ['Сессия', 'Экзамены, зачёты и консультации из опубликованного расписания.'],
+  teachers: ['Преподаватели', 'Найди контакты преподавателя и посмотри его учебную неделю.'],
+  campus: ['Кампус', 'Корпуса и занятия в доступных расписаниях.'],
+  community: ['Моя группа', 'Общие дела, объявления и решения — в пространстве Kupala Hub.'],
+  finance: ['Платежи и документы', 'Информация личного кабинета с понятным статусом источника.'],
+  profile: ['Профиль и настройки', 'Твои данные и предпочтения в Kupala Hub.'],
+  notifications: ['Уведомления', 'Изменения расписания и ближайшие учебные сроки.'],
+};
+const groups = [
+  [
+    'Мой день',
+    [
+      ['today', 'Сегодня', LayoutDashboard],
+      ['schedule', 'Расписание', CalendarDays],
+      ['tasks', 'Задачи', CheckSquare],
+      ['assistant', 'Ассистент', MessageCircle],
+    ],
+  ],
+  [
+    'Учёба',
+    [
+      ['study', 'Успеваемость', GraduationCap],
+      ['materials', 'Материалы', BookOpen],
+      ['exams', 'Сессия', CalendarDays],
+    ],
+  ],
+  [
+    'Университет',
+    [
+      ['teachers', 'Преподаватели', UserRound],
+      ['campus', 'Кампус', MapPin],
+      ['community', 'Моя группа', Users],
+    ],
+  ],
+  [
+    'Личное',
+    [
+      ['finance', 'Платежи и документы', Wallet],
+      ['profile', 'Профиль и настройки', UserRound],
+      ['notifications', 'Уведомления', Bell],
+    ],
+  ],
+];
+export function ExpandedNav({ page, navigate, taskCount }) {
+  return (
+    <nav className="main-nav expanded-nav" aria-label="Основные разделы">
+      {groups.map(([name, items]) => (
+        <div className="nav-section" key={name}>
+          <span className="nav-section-title">{name}</span>
+          {items.map(([id, label, Icon]) => (
+            <a
+              key={id}
+              href={'#' + id}
+              aria-current={page === id ? 'page' : undefined}
+              className={page === id ? 'active' : ''}
+              onClick={() => navigate(id)}
+            >
+              <Icon size={18} />
+              <span>{label}</span>
+              {id === 'tasks' && taskCount > 0 && <span className="nav-count">{taskCount}</span>}
+            </a>
+          ))}
+        </div>
+      ))}
+    </nav>
+  );
+}
+export function ExpandedPage({
+  page,
+  settings,
+  session,
+  notify,
+  onLesson,
+  onGroup,
+  onProfile,
+  tasks,
+  schedule,
+  navigate,
+  onAddTask,
+  onReloadTasks,
+}) {
+  switch (page) {
+    case 'assistant':
+      return (
+        <AssistantPage
+          scope={settings.mode === 'demo' ? 'demo' : 'live'}
+          settings={settings}
+          tasks={tasks}
+          schedule={schedule}
+          onReloadTasks={onReloadTasks}
+        />
+      );
+    case 'study':
+      return <LearningPage key="study" mode={settings.mode} />;
+    case 'finance':
+      return <LearningPage key="finance" kind="finance" mode={settings.mode} />;
+    case 'materials':
+      return <MaterialsPage mode={settings.mode} notify={notify} />;
+    case 'teachers':
+      return <TeachersPage mode={settings.mode} onLesson={onLesson} notify={notify} />;
+    case 'exams':
+      return <ExamsPage settings={settings} onLesson={onLesson} />;
+    case 'campus':
+      return <CampusPage settings={settings} />;
+    case 'community':
+      return <CommunityPage mode={settings.mode} notify={notify} onAddTask={onAddTask} />;
+    case 'profile':
+      return (
+        <ProfilePage
+          session={session}
+          settings={settings}
+          onProfile={onProfile}
+          onGroup={onGroup}
+          notify={notify}
+        />
+      );
+    case 'notifications':
+      return (
+        <NotificationsPage
+          tasks={tasks}
+          schedule={schedule}
+          settings={settings}
+          navigate={navigate}
+        />
+      );
+    default:
+      return null;
+  }
+}
