@@ -1,0 +1,31 @@
+{
+  "name": "kupala-hub",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "dev": "node scripts/dev.js",
+    "dev:api": "node --watch server/index.js",
+    "dev:web": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "start": "node --env-file-if-exists=.env server/index.js",
+    "test": "node --test tests/*.test.js",
+    "check:portal": "node scripts/check-portal.js",
+    "setup:agent": "node scripts/setup-agent.js",
+    "dev:agent": "node scripts/agent.js",
+    "start:agent": "node scripts/agent.js",
+    "test:agent": ".venv/bin/python -m unittest ai_service.test_app"
+  },
+  "dependencies": {
+    "fastify": "^5.6.1",
+    "react": "19.2.5",
+    "react-dom": "19.2.5",
+    "lucide-react": "0.577.0"
+  },
+  "devDependencies": {
+    "vite": "7.3.2"
+  }
+}

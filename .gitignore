@@ -1,0 +1,25 @@
+# Зависимости
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+
+# Сборка
+dist/
+
+# Локальные данные и сгенерированные артефакты
+data/
+artifacts/
+*.log
+
+# Окружение
+.env
+.env.*
+!.env.example
+
+# Архивы дизайна (распакованы в design/)
+design/*.zip
+
+# Инструменты
+.idea/
+.playwright-mcp/
